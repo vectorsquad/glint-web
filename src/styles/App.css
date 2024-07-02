@@ -1,0 +1,89 @@
+/* src/styles/App.css */
+
+body {
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #FEFEFE; /* Light background color */
+}
+
+h1 {
+  color: #040404; /* Dark text color */
+}
+
+a {
+  color: #15DB63; /* Primary accent color */
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.form-container {
+  background-color: #FEFEFE; /* Light background color */
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #040404; /* Dark text color */
+}
+
+button, .black-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #040404; /* Dark background */
+  border: none;
+  color: #FEFEFE; /* Light text */
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px 0;
+  text-align: center;
+  display: inline-block;
+}
+
+button:hover, .black-button:hover {
+  background-color: #333333; /* Slightly lighter black */
+}
+
+p {
+  color: #666;
+}
+
+.link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.home {
+  text-align: center;
+  color: #040404; /* Dark text color */
+}
+
+.home h1 {
+  color: #040404; /* Dark text color */
+}
+
+.home .link a {
+  background-color: #040404; /* Dark background */
+  color: #FEFEFE; /* Light text */
+  padding: 10px 20px;
+  border-radius: 4px;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.home .link a:hover {
+  background-color: #333333; /* Slightly lighter black */
+}

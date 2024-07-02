@@ -1,31 +1,27 @@
+// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './components/Home';
-import About from './components/About';
-import Login from './components/Login';
-import Signup from './components/Signup';
-import Dashboard from './components/Dashboard';
-import SetPage from './components/SetPage';
-import StudySession from './components/StudySession';
+import HomePage from './pages/HomePage';
+import LoginPage from './pages/LoginPage';
+import SignupPage from './pages/SignupPage';
 import Header from './components/Header';
-import Footer from './components/Footer';
+import './styles/App.css';
 
 const App: React.FC = () => {
   return (
     <Router>
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/set/:id" element={<SetPage />} />
-        <Route path="/study" element={<StudySession />} />
-      </Routes>
-      <Footer />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/about" element={<div>About Us</div>} /> {/* Placeholder for About Us */}
+          <Route path="/dashboard" element={<div>Dashboard</div>} /> {/* Temporary dashboard */}
+        </Routes>
+      </div>
     </Router>
   );
-}
+};
 
 export default App;

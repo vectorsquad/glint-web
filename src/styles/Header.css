@@ -1,0 +1,36 @@
+.header {
+    color: #040404; /* Dark text color */
+    padding: 10px 0;
+  }
+  
+  .header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .header .logo {
+    font-size: 24px;
+    color: #15DB63; /* Primary accent color */
+    text-decoration: none;
+  }
+  
+  .header nav a {
+    color: #040404; /* Dark text color */
+    margin-left: 20px;
+    text-decoration: none;
+  }
+  
+  .header nav .login-button {
+    background-color: #040404; /* Black background */
+    color: #FEFEFE; /* White text */
+    padding: 10px 20px;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  .header nav .login-button:hover {
+    background-color: #333333; /* Slightly lighter black */
+  }
+  
+  
