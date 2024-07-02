@@ -87,3 +87,9 @@ p {
 .home .link a:hover {
   background-color: #333333; /* Slightly lighter black */
 }
+
+.logo {
+  max-width: 500px;
+  height: auto;
+  margin-bottom: 20px; /* Add margin below the logo */
+}

@@ -7,6 +7,7 @@ const HomePage: React.FC = () => {
   return (
     <div className="home">
       <h1>Welcome to Glint</h1>
+      <img src="/logo.jpg" alt="Glint Logo" className="logo" />
       <div className="link">
         <Link to="/login">Log In</Link>
         <Link to="/signup">Sign Up</Link>
