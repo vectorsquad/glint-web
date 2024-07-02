@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/login', { email, password });
+      const response = await axios.post('/api/v1/login', { email, password });
       if (response.data.success) {
         navigate('/dashboard');
       } else {
