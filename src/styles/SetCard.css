@@ -1,0 +1,36 @@
+.set-card {
+  width: 200px;
+  height: 100px;
+  border: 1px solid #040404;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.add-card {
+  background-color: #f0f0f0;
+}
+
+.set-content {
+  text-align: center;
+}
+
+.set-title {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #040404;
+}
+
+.card-count {
+  font-size: 12px;
+  color: #040404;
+}
+
+.add-card span {
+  font-size: 24px;
+  color: #040404;
+}

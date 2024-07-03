@@ -1,0 +1,17 @@
+.dashboard {
+    padding: 10px;
+  }
+
+  .sets-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .view-all-sets {
+    display: block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #15DB63;
+    font-size: 14px;
+  }
+  
