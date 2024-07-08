@@ -11,7 +11,6 @@ import './styles/App.css';
 const App: React.FC = () => {
   return (
     <Router>
-      <Header />
       <div className="container">
         <Routes>
           <Route path="/" element={<HomePage />} />

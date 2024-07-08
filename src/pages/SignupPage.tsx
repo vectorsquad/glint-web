@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/App.css';
+import Header from '../components/Header'
 
 const SignupPage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -32,40 +33,43 @@ const SignupPage: React.FC = () => {
   };
 
   return (
-    <div className="form-container">
-      <h1>Sign Up</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="First Name"
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          placeholder="Last Name"
-          value={lastName}
-          onChange={(e) => setLastName(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Sign Up</button>
-      </form>
-      <p className="link">Already have an account? <Link to="/login">Log in!</Link></p>
+    <div>
+      <Header />
+      <div className="form-container">
+        <h1>Sign Up</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+            required
+          />
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Sign Up</button>
+        </form>
+        <p className="link">Already have an account? <Link to="/login">Log in!</Link></p>
+      </div>
     </div>
   );
 };
