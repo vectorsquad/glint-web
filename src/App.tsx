@@ -6,6 +6,7 @@ import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import Dashboard from './pages/Dashboard';
 import Header from './components/Header';
+import AboutUs from './pages/AboutUs'
 import './styles/App.css';
 
 const App: React.FC = () => {
@@ -16,7 +17,7 @@ const App: React.FC = () => {
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignupPage />} />
-          <Route path="/about" element={<div>About Us</div>} /> {/* Placeholder for About Us */}
+          <Route path="/about" element={<AboutUs/>} /> 
           <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </div>

@@ -9,6 +9,7 @@ body {
 }
 
 h1 {
+  margin-left: 10px;
   color: #040404; /* Dark text color */
 }
 
@@ -32,25 +33,26 @@ a {
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
-  width: 100%;
+  width: 95%;
   padding: 10px;
-  margin: 10px 0;
+  margin: 10px auto;
   border: 1px solid #ddd;
   border-radius: 4px;
   color: #040404; /* Dark text color */
+  display: block;
 }
 
 button, .black-button {
-  width: 100%;
+  width: 97.5%;
   padding: 10px;
   background-color: #040404; /* Dark background */
   border: none;
   color: #FEFEFE; /* Light text */
   border-radius: 4px;
   cursor: pointer;
-  margin: 10px 0;
+  margin: 10px auto;
   text-align: center;
-  display: inline-block;
+  display: block;
 }
 
 button:hover, .black-button:hover {
@@ -92,4 +94,20 @@ p {
   max-width: 500px;
   height: auto;
   margin-bottom: 20px; /* Add margin below the logo */
+}
+
+.input-container {
+  position: relative;
+}
+
+.regexError {
+  color: red;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.validation-message {
+  color: red;
+  margin-left: 10px;
 }
