@@ -76,7 +76,7 @@ const SignupPage: React.FC = () => {
     
     if(isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid){
       try {
-        const response = await axios.post('/api/signup', {
+        const response = await axios.post('/api/v1/signup', {
           firstName,
           lastName,
           email,
