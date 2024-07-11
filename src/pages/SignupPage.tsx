@@ -9,17 +9,20 @@ const SignupPage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [validity, setValidity] = useState({
     firstName: true,
     lastName: true,
     email: true,
+    username: true,
     password: true,
   });
   const [errorMessage, setErrorMessage] = useState({
     firstName: '',
     lastName: '',
     email: '',
+    username: '',
     password: '',
   });
   const navigate = useNavigate();
@@ -27,6 +30,7 @@ const SignupPage: React.FC = () => {
   const handleValidation = (name: string, value: string) => {
     const nameRegex = /^[A-Za-z]+$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    const usernameRegex = /^[A-Za-z0-9]+$/;
     const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
   
     let isValid = true;
@@ -44,6 +48,10 @@ const SignupPage: React.FC = () => {
       case 'email':
         isValid = emailRegex.test(value);
         message = isValid ? '' : '- Invalid Email';
+        break;
+      case 'username':
+        isValid = usernameRegex.test(value);
+        message = isValid ? '' : '- Username can only contain letters and numbers'
         break;
       case 'password':
         isValid = passwordRegex.test(value);
@@ -72,6 +80,7 @@ const SignupPage: React.FC = () => {
     const isFirstNameValid = handleValidation('firstName', firstName);
     const isLastNameValid = handleValidation('lastName', lastName);
     const isEmailValid = handleValidation('email', email);
+    const isUsernameValid = handleValidation('username', username);
     const isPasswordValid = handleValidation('password', password);
     
     if(isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid){
@@ -80,6 +89,7 @@ const SignupPage: React.FC = () => {
           firstName,
           lastName,
           email,
+          username,
           password,
         });
         if (response.data.success) {
@@ -141,6 +151,19 @@ const SignupPage: React.FC = () => {
             </div>
             <div className="input-container">
               <input
+                type="text"
+                placeholder="Username"
+                value={username}
+                onChange={(e) => {
+                  setUsername(e.target.value);
+                  handleValidation('username', e.target.value);
+                }}
+                required
+              />
+              {!validity.username && <span className="regexError">x</span>}
+            </div>
+            <div className="input-container">
+              <input
                 type="password"
                 placeholder="Password"
                 value={password}
@@ -155,6 +178,7 @@ const SignupPage: React.FC = () => {
           {errorMessage.firstName && <p className="validation-message">{errorMessage.firstName}</p>}
           {errorMessage.lastName && <p className="validation-message">{errorMessage.lastName}</p>}
           {errorMessage.email && <p className="validation-message">{errorMessage.email}</p>}
+          {errorMessage.username && <p className="validation-message">{errorMessage.username}</p>}
           {errorMessage.password && <p className="validation-message">{errorMessage.password}</p>}
           <button type="submit">Sign Up</button>
         </form>
