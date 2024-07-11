@@ -86,11 +86,11 @@ const SignupPage: React.FC = () => {
     if(isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid){
       try {
         const response = await axios.post('/api/v1/register', {
-          firstName,
-          lastName,
-          email,
-          username,
-          password,
+          name_first: firstName,
+          name_last: lastName,
+          email: email,
+          username: username,
+          password_hash: password,
         });
         if (response.data.success) {
           alert('Please check your email to verify your account.');
