@@ -6,15 +6,18 @@ import '../styles/App.css';
 import Header from '../components/Header';
 
 const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/v1/login', { email, password });
-      if (response.data.success) {
+      const response = await axios.post('/api/v1/login', { 
+        username: username, 
+        password_hash: password 
+      });
+      if (response.status === 200) {
         navigate('/dashboard');
       } else {
         alert('Invalid login');
@@ -31,10 +34,10 @@ const LoginPage: React.FC = () => {
         <h1>Log In</h1>
         <form onSubmit={handleSubmit}>
           <input
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
           />
           <input
