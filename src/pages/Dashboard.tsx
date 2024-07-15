@@ -15,7 +15,8 @@ interface FindDeckResponse {
 }
 
 interface JwtPayload {
-  userId: string;
+  id: string;  // Changed from userId to id
+  // Add other JWT payload fields if necessary
 }
 
 const Dashboard: React.FC = () => {
@@ -40,10 +41,10 @@ const Dashboard: React.FC = () => {
     if (token) {
       try {
         const decodedToken = jwtDecode<JwtPayload>(token);
-        setUserId(decodedToken.userId);
+        setUserId(decodedToken.id);  // Changed from userId to id
       } catch (error) {
         console.error('Error decoding JWT:', error);
-        setError('JWT Error?');
+        setError('Authentication error. Please log in again.');
       }
     } else {
       setError('Not authenticated. Please log in.');
@@ -52,7 +53,7 @@ const Dashboard: React.FC = () => {
 
   const fetchDecks = useCallback(async () => {
     if (!userId) {
-      setError('Database Error?');
+      setError('User ID not available. Please log in.');
       return;
     }
 
