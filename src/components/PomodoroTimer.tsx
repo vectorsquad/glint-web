@@ -1,27 +1,26 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/PomodoroTimer.css';
 
 const PomodoroTimer: React.FC = () => {
-  const [time, setTime] = useState(25 * 60); // 25 minutes in seconds
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [isBreak, setIsBreak] = useState(false);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+    let interval: NodeJS.Timeout | undefined;
     if (isActive) {
       interval = setInterval(() => {
-        setTime((prevTime) => {
-          if (prevTime === 1) {
-            clearInterval(interval!);
+        if (seconds > 0) {
+          setSeconds(seconds - 1);
+        } else if (seconds === 0) {
+          if (minutes === 0) {
             setIsActive(false);
-            setIsBreak(prevIsBreak => {
-              const newIsBreak = !prevIsBreak;
-              setTime(newIsBreak ? 5 * 60 : 25 * 60);
-              return newIsBreak;
-            });
-            return prevTime; // Avoid changing time here due to state update above
+            clearInterval(interval);
+          } else {
+            setMinutes(minutes - 1);
+            setSeconds(59);
           }
-          return prevTime - 1;
-        });
+        }
       }, 1000);
     } else {
       if (interval) clearInterval(interval);
@@ -29,26 +28,23 @@ const PomodoroTimer: React.FC = () => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isActive]);
+  }, [isActive, seconds, minutes]);
 
-  const handleStartPause = () => {
-    setIsActive(!isActive);
-  };
-
-  const handleReset = () => {
+  const resetTimer = () => {
+    setMinutes(25);
+    setSeconds(0);
     setIsActive(false);
-    setIsBreak(false);
-    setTime(25 * 60);
   };
 
   return (
-    <div>
-      <h1>{isBreak ? 'Break Time' : 'Work Time'}</h1>
-      <div>
-        <span>{Math.floor(time / 60)}:{time % 60 < 10 ? '0' : ''}{time % 60}</span>
+    <div className="pomodoro-timer">
+      <div className="time">
+        {minutes}:{seconds < 10 ? `0${seconds}` : seconds}
       </div>
-      <button onClick={handleStartPause}>{isActive ? 'Pause' : 'Start'}</button>
-      <button onClick={handleReset}>Reset</button>
+      <button onClick={() => setIsActive(!isActive)}>
+        {isActive ? 'Pause' : 'Start'}
+      </button>
+      <button onClick={resetTimer}>Reset</button>
     </div>
   );
 };

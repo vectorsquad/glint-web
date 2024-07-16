@@ -1,17 +1,31 @@
-.dashboard {
-    padding: 10px;
-  }
+.dashboard-container {
+  padding: 20px;
+}
 
-  .sets-row {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .view-all-sets {
-    display: block;
-    margin-top: 20px;
-    text-decoration: none;
-    color: #15DB63;
-    font-size: 14px;
-  }
-  
+.deck-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.deck-card {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+}
+
+.add-set-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.plus-icon {
+  font-size: 24px;
+  font-weight: bold;
+}
