@@ -31,7 +31,7 @@ const SignupPage: React.FC = () => {
     const nameRegex = /^[A-Za-z]+$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     const usernameRegex = /^[A-Za-z0-9]+$/;
-    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-zA-Z]).{8,}$/;
+    const passwordRegex = /^(?=.*\d)(?=.*[!@#$%^&*()])(?=.*[a-zA-Z]).{8,}$/;
   
     let isValid = true;
     let message = '';

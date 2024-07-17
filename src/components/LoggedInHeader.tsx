@@ -7,10 +7,10 @@ const Header: React.FC = () => {
   return (
     <header className="header">
       <div className="container">
-        <Link to="/" className="logo">Glint</Link>
+        <Link to="/dashboard" className="logo">Glint</Link>
         <input type="text" placeholder='Search' className="search-bar" />
         <nav>
-          <Link to="/about">About Us</Link>
+          
           <Link to="/" className="login-button">Log Out</Link>
         </nav>
       </div>
