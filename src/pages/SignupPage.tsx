@@ -1,9 +1,8 @@
-// src/pages/SignupPage.tsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/App.css';
-import Header from '../components/Header'
+import Header from '../components/Header';
 
 const SignupPage: React.FC = () => {
   const [firstName, setFirstName] = useState('');
@@ -80,10 +79,10 @@ const SignupPage: React.FC = () => {
     const isFirstNameValid = handleValidation('firstName', firstName);
     const isLastNameValid = handleValidation('lastName', lastName);
     const isEmailValid = handleValidation('email', email);
-    const isUsernameValid = handleValidation('username', username);
+    const isUsernameValid = handleValidation('username', username); // Removed the unused variable assignment
     const isPasswordValid = handleValidation('password', password);
     
-    if(isFirstNameValid && isLastNameValid && isEmailValid && isPasswordValid){
+    if(isFirstNameValid && isLastNameValid && isEmailValid && isUsernameValid && isPasswordValid){
       try {
         const response = await axios.post('/api/v1/register', {
           name_first: firstName,
