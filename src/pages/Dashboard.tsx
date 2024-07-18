@@ -78,10 +78,7 @@ const Dashboard: React.FC = () => {
     try {
       const response = await axios.post<FindDeckResponse>(
         '/api/v1/findDeck',
-        {
-          user_id: userId,
-          deck_name: searchTerm
-        },
+        { deck_name: searchTerm },
         {
           headers: {
             'Authorization': `Bearer ${getCookie('auth')}`
@@ -110,8 +107,7 @@ const Dashboard: React.FC = () => {
 
     try {
       const response = await axios.post('/api/v1/createDeck', {
-        user_id: userId,
-        name
+        deck_name: name
       }, {
         headers: {
           'Authorization': `Bearer ${getCookie('auth')}`
