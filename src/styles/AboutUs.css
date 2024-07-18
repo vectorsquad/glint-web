@@ -1,0 +1,35 @@
+.AboutUs {
+    text-align: center;
+    padding: 0px 20px;
+  }
+  
+  .AboutUs h1 {
+    margin-bottom: 0px;
+  }
+  
+  .US {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .person {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 150px;
+  }
+  
+  .profile-pic {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .person h3 {
+    margin-top: 0;
+  }
+  
