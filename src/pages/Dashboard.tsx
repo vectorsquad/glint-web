@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from 'react';
+// Dashboard.tsx (Frontend)
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import axios from 'axios';
-import { jwtDecode } from 'jwt-decode';
 import Modal from '../components/Modal';
 import Header from '../components/LoggedInHeader';
+import AddCardForm from '../components/AddCardForm';
 import '../styles/Dashboard.css';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 interface IDeck {
   _id: string;
@@ -18,57 +20,19 @@ interface FindDeckResponse {
   message: string;
 }
 
-interface JwtPayload {
-  sub: string;  // Changed from id to sub
-  exp: number;
-  iat: number;
-}
-
 const Dashboard: React.FC = () => {
+  const { user } = useContext(AuthContext);
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
-  const [userId, setUserId] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingDeck, setEditingDeck] = useState<IDeck | null>(null);
+  const [selectedDeck, setSelectedDeck] = useState<IDeck | null>(null);
   const navigate = useNavigate();
 
-  const getCookie = useCallback((name: string): string | null => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
-    return null;
-  }, []);
-
-  useEffect(() => {
-    const token = getCookie('auth');
-    console.log('Auth cookie:', token);
-
-    if (token) {
-      try {
-        const decodedToken = jwtDecode<JwtPayload>(token);
-        console.log('Decoded token:', decodedToken);
-        
-        if (decodedToken.sub) {
-          setUserId(decodedToken.sub);
-          console.log('User ID set:', decodedToken.sub);
-        } else {
-          console.error('Token does not contain a sub field');
-          setError('Invalid token structure. Please log in again.');
-        }
-      } catch (error) {
-        console.error('Error decoding JWT:', error);
-        setError('Authentication error. Please log in again.');
-      }
-    } else {
-      console.log('No auth cookie found');
-      setError('Not authenticated. Please log in.');
-    }
-  }, [getCookie]);
-
   const fetchDecks = useCallback(async () => {
-    if (!userId) {
+    if (!user) {
       setError('User ID not available. Please log in.');
       return;
     }
@@ -81,7 +45,7 @@ const Dashboard: React.FC = () => {
         { deck_name: searchTerm },
         {
           headers: {
-            'Authorization': `Bearer ${getCookie('auth')}`
+            'Authorization': `Bearer ${user.token}`
           }
         }
       );
@@ -91,16 +55,16 @@ const Dashboard: React.FC = () => {
       setError('Failed to fetch decks. Please try again.');
     }
     setIsLoading(false);
-  }, [userId, searchTerm, getCookie]);
+  }, [user, searchTerm]);
 
   useEffect(() => {
-    if (userId) {
+    if (user) {
       fetchDecks();
     }
-  }, [userId, fetchDecks]);
+  }, [user, fetchDecks]);
 
   const handleCreateDeck = async (name: string) => {
-    if (!userId) {
+    if (!user) {
       setError('User ID not available. Please log in.');
       return;
     }
@@ -110,7 +74,7 @@ const Dashboard: React.FC = () => {
         deck_name: name
       }, {
         headers: {
-          'Authorization': `Bearer ${getCookie('auth')}`
+          'Authorization': `Bearer ${user.token}`
         }
       });
 
@@ -122,7 +86,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleEditDeck = async (deckId: string, name: string) => {
-    if (!userId) {
+    if (!user) {
       setError('User ID not available. Please log in.');
       return;
     }
@@ -132,7 +96,7 @@ const Dashboard: React.FC = () => {
         name
       }, {
         headers: {
-          'Authorization': `Bearer ${getCookie('auth')}`
+          'Authorization': `Bearer ${user.token}`
         }
       });
 
@@ -144,15 +108,17 @@ const Dashboard: React.FC = () => {
   };
 
   const handleDeleteDeck = async (deckId: string) => {
-    if (!userId) {
+    if (!user) {
       setError('User ID not available. Please log in.');
       return;
     }
 
     try {
-      await axios.delete(`/api/v1/deleteDeck/${deckId}`, {
+      await axios.post('/api/v1/deleteDeck', {
+        id: deckId
+      }, {
         headers: {
-          'Authorization': `Bearer ${getCookie('auth')}`
+          'Authorization': `Bearer ${user.token}`
         }
       });
 
@@ -195,6 +161,10 @@ const Dashboard: React.FC = () => {
     }
   };
 
+  const handleCardAdded = () => {
+    fetchDecks();
+  };
+
   return (
     <div>
       <Header />
@@ -220,6 +190,7 @@ const Dashboard: React.FC = () => {
                     <button onClick={() => openEditModal(deck)}>Edit</button>
                     <button onClick={() => handleDeleteDeck(deck._id)}>Delete</button>
                     <button onClick={() => handleStudyDeck(deck._id)}>Study</button>
+                    <button onClick={() => setSelectedDeck(deck)}>Add Card</button>
                   </div>
                 ))
               ) : (
@@ -229,6 +200,12 @@ const Dashboard: React.FC = () => {
                 </div>
               )}
             </div>
+            {selectedDeck && (
+              <div className="add-card-form">
+                <h2>Add Card to {selectedDeck.name}</h2>
+                <AddCardForm deckId={selectedDeck._id} onCardAdded={handleCardAdded} />
+              </div>
+            )}
           </>
         )}
       </div>

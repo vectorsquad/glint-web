@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+// src/pages/StudyPage.tsx
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import PomodoroTimer from '../components/PomodoroTimer';
 import Modal from '../components/Modal';
 import '../styles/StudyPage.css';
+import { AuthContext } from '../context/AuthContext';
 
 interface ICard {
   _id: string;
@@ -19,6 +21,7 @@ interface IDeck {
 
 const StudyPage: React.FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
+  const { user } = useContext(AuthContext);
   const [deck, setDeck] = useState<IDeck | null>(null);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
@@ -33,7 +36,11 @@ const StudyPage: React.FC = () => {
       setIsLoading(true);
       setError('');
       try {
-        const response = await axios.get(`/api/v1/getDeck/${deckId}`);
+        const response = await axios.get(`/api/v1/getDeck/${deckId}`, {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
         setDeck(response.data);
       } catch (error) {
         console.error('Error fetching deck:', error);
@@ -43,7 +50,7 @@ const StudyPage: React.FC = () => {
     };
 
     fetchDeck();
-  }, [deckId]);
+  }, [deckId, user.token]);
 
   const openCreateModal = () => {
     setEditingCard(null);
@@ -104,7 +111,11 @@ const StudyPage: React.FC = () => {
     if (!deck) return;
 
     try {
-      await axios.delete(`/api/v1/deleteCard/${cardId}`);
+      await axios.delete(`/api/v1/deleteCard/${cardId}`, {
+        headers: {
+          'Authorization': `Bearer ${user.token}`
+        }
+      });
 
       const updatedCards = deck.cards.filter(card => card._id !== cardId);
       setDeck({ ...deck, cards: updatedCards });
@@ -154,7 +165,6 @@ const StudyPage: React.FC = () => {
         isOpen={isModalOpen}
         onClose={closeModal}
         onSave={handleSaveCard}
-        initialName={editingCard ? editingCard.question : ''}
       >
         <div>
           <label>Question</label>

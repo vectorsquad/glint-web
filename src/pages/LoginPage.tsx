@@ -1,14 +1,16 @@
-// src/pages/LoginPage.tsx
-import React, { useState } from 'react';
+// LoginPage.tsx (Frontend)
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
 import '../styles/App.css';
 import Header from '../components/Header';
+import { AuthContext } from '../context/AuthContext';
 
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -18,6 +20,8 @@ const LoginPage: React.FC = () => {
         password_hash: password 
       });
       if (response.status === 200) {
+        const token = response.headers['set-cookie'];
+        setUser({ token });
         navigate('/dashboard');
       } else {
         alert('Invalid login');
