@@ -1,4 +1,3 @@
-// LoginPage.tsx (Frontend)
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
@@ -9,25 +8,30 @@ import { AuthContext } from '../context/AuthContext';
 const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/v1/login', { 
-        username: username, 
-        password_hash: password 
+      const response = await axios.post('/api/v1/login', {
+        login: {
+          username: username,
+          password_hash: password,
+        },
       });
+
       if (response.status === 200) {
-        const token = response.headers['set-cookie'];
+        const token = response.data.token || document.cookie;
         setUser({ token });
         navigate('/dashboard');
       } else {
-        alert('Invalid login');
+        setError('Invalid login');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error logging in:', error);
+      setError(error.response?.data?.message || 'Error logging in');
     }
   };
 
@@ -36,6 +40,7 @@ const LoginPage: React.FC = () => {
       <Header />
       <div className="form-container">
         <h1>Log In</h1>
+        {error && <p className="error">{error}</p>}
         <form onSubmit={handleSubmit}>
           <input
             type="text"
