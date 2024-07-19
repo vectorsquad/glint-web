@@ -1,5 +1,5 @@
 // src/components/Modal.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/Modal.css';
 
 interface ICard {
@@ -48,6 +48,16 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, children }) => {
     setError('');
   };
 
+  const adjustTextareaHeight = (textarea: HTMLTextAreaElement) => {
+    textarea.style.height = 'auto';
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  };
+
+  useEffect(() => {
+    const textareas = document.querySelectorAll('.card-input-textarea');
+    textareas.forEach(textarea => adjustTextareaHeight(textarea as HTMLTextAreaElement));
+  }, [cards]);
+
   if (!isOpen) return null;
 
   return (
@@ -85,6 +95,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, children }) => {
                     onChange={(e) => handleCardChange(index, 'front', e.target.value)}
                     required
                     className="card-input-textarea"
+                    onInput={(e) => adjustTextareaHeight(e.target as HTMLTextAreaElement)}
                   />
                   <label htmlFor={`back-${index}`}>Back</label>
                   <textarea
@@ -94,6 +105,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, children }) => {
                     onChange={(e) => handleCardChange(index, 'back', e.target.value)}
                     required
                     className="card-input-textarea"
+                    onInput={(e) => adjustTextareaHeight(e.target as HTMLTextAreaElement)}
                   />
                 </div>
               </div>

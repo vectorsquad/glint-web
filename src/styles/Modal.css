@@ -65,12 +65,14 @@
 }
 
 .card-input {
-  background-color: #15DB63; /* Green background for each card entry */
+  background-color: #928779; /* Background color for each card entry */
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 20px;
   width: 100%; /* Make card fill the available width */
   box-sizing: border-box;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More rounded shadow */
+  color: white; /* White text color inside the card */
 }
 
 .input-pair {
@@ -83,6 +85,7 @@
 .input-pair label {
   margin-right: 10px;
   white-space: nowrap;
+  color: white; /* White label text color */
 }
 
 .card-input-textarea {
@@ -92,10 +95,11 @@
   border-radius: 4px;
   width: 48%; /* Adjust width to fit side by side */
   font-family: Arial, sans-serif; /* Ensure consistent font */
-  height: 40px; /* Fixed height to match the label */
+  height: 53px; /* Fixed height to match the label */
   box-sizing: border-box;
   resize: none; /* Disable resizing */
   margin-right: 10px; /* Add space between front and back text boxes */
+  overflow: hidden; /* Hide overflow to adjust height dynamically */
 }
 
 .button-container {
@@ -105,9 +109,10 @@
   margin-top: 20px;
 }
 
-.add-card-btn {
+.add-card-btn,
+.create-btn {
   padding: 10px 20px;
-  background-color: #0dbb4c; /* Different shade of green */
+  background-color: #15DB63; /* Use the primary color */
   color: white;
   border: none;
   border-radius: 4px;
@@ -116,22 +121,9 @@
   margin-bottom: 10px;
 }
 
-.add-card-btn:hover {
-  background-color: #0a9940; /* Darker shade for hover effect */
-}
-
-.create-btn {
-  padding: 10px 20px;
-  background-color: #0dbb4c; /* Different shade of green */
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: Arial, sans-serif; /* Ensure consistent font */
-}
-
+.add-card-btn:hover,
 .create-btn:hover {
-  background-color: #0a9940; /* Darker shade for hover effect */
+  background-color: #12b354; /* Darker shade of the primary color for hover effect */
 }
 
 .modal-footer {
