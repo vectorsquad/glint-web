@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
         },
       });
 
-      if (response.status === 200) {
+      if (response.status >= 200 && response.status < 300) {
         const token = response.data.token || document.cookie;
         setUser({ token });
         navigate('/dashboard');
