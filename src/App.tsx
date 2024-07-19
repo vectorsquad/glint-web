@@ -9,6 +9,7 @@ import SignupPage from './pages/SignupPage';
 import StudyPage from './pages/StudyPage';
 import './styles/App.css';
 import { AuthProvider } from './context/AuthContext';
+import InitialAuthCheck from './components/InitialAuthCheck';
 
 const App: React.FC = () => {
   return (
@@ -16,7 +17,7 @@ const App: React.FC = () => {
       <Router>
         <div className="App">
           <Routes>
-            <Route path="/" element={<Homepage />} />
+            <Route path="/" element={<InitialAuthCheck />} />
             <Route path="/about" element={<AboutUs />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
