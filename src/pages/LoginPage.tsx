@@ -22,10 +22,19 @@ const LoginPage: React.FC = () => {
         },
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response data:', response.data);
+
       if (response.status >= 200 && response.status < 300) {
         const token = response.data.token || document.cookie;
-        setUser({ token });
-        navigate('/dashboard');
+        console.log('Token:', token);
+
+        if (token) {
+          setUser({ token });
+          navigate('/dashboard');
+        } else {
+          setError('Invalid login: Token not received');
+        }
       } else {
         setError('Invalid login');
       }
