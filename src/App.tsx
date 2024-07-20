@@ -10,6 +10,8 @@ import StudyPage from './pages/StudyPage';
 import './styles/App.css';
 import { AuthProvider } from './context/AuthContext';
 import InitialAuthCheck from './components/InitialAuthCheck';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import SendPassword from './pages/SendPasswordPage'
 
 const App: React.FC = () => {
   return (
@@ -23,6 +25,8 @@ const App: React.FC = () => {
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/study/:deckId" element={<StudyPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/updatePassword" element={<ResetPasswordPage/>} />
+            <Route path="/sendPassword" element={<SendPassword />} />
           </Routes>
         </div>
       </Router>
