@@ -1,4 +1,3 @@
-// src/pages/Dashboard.tsx
 import React, { useState, useEffect, useCallback, useContext } from 'react';
 import axios from 'axios';
 import Modal from '../components/Modal';
@@ -16,12 +15,6 @@ interface IDeck {
 interface ICard {
   front: string;
   back: string;
-}
-
-interface FindDeckResponse {
-  decks: IDeck[] | null;
-  quantity: number;
-  message: string;
 }
 
 const Dashboard: React.FC = () => {
@@ -42,21 +35,23 @@ const Dashboard: React.FC = () => {
     setIsLoading(true);
     setError('');
     try {
-      const response = await axios.post<FindDeckResponse>(
+      const response = await axios.post<IDeck[]>(
         '/api/v1/findDeck',
-        { deck_name: searchTerm },
+        { name: searchTerm },  // Changed from deck_name to name
         {
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
         }
       );
-      setDecks(response.data.decks || []);
+      console.log('API Response:', response.data); // For debugging
+      setDecks(response.data);
     } catch (error) {
       console.error('Error fetching decks:', error);
       setError('Failed to fetch decks. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   }, [user, searchTerm]);
 
   useEffect(() => {
@@ -166,6 +161,7 @@ const Dashboard: React.FC = () => {
               onChange={(e) => setSearchTerm(e.target.value)} 
               onKeyPress={handleSearchKeyPress}
             />
+            <p>Debug: {decks.length} decks loaded</p>
             <div className="deck-cards-container">
               {decks.map((deck) => (
                 <div key={deck._id} className="deck-card">
