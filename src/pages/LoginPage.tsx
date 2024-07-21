@@ -50,16 +50,16 @@ const LoginPage: React.FC = () => {
 
   const resetPasswordButtonStyle = {
     marginTop: '10px',
-    padding: '12px 20px',
-    backgroundColor: '#0056b3',
-    color: '#ffffff',
+    padding: '8px 12px',
+    backgroundColor: '#15db63',
+    color: '#fff',
     border: 'none',
-    borderRadius: '5px',
+    borderRadius: '4px',
     cursor: 'pointer',
     transition: 'background-color 0.3s, box-shadow 0.3s',
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: 'bold',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
   };
 
   return (
