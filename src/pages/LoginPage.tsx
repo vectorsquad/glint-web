@@ -45,17 +45,21 @@ const LoginPage: React.FC = () => {
   };
 
   const handleResetPassword = () => {
-    navigate('/updatePassword');
+    navigate('/sendPassword');
   };
 
   const resetPasswordButtonStyle = {
     marginTop: '10px',
-    padding: '10px 15px',
-    backgroundColor: '#f0f0f0',
+    padding: '12px 20px',
+    backgroundColor: '#0056b3',
+    color: '#ffffff',
     border: 'none',
     borderRadius: '5px',
     cursor: 'pointer',
-    transition: 'background-color 0.3s',
+    transition: 'background-color 0.3s, box-shadow 0.3s',
+    fontSize: '16px',
+    fontWeight: 'bold',
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
   };
 
   return (
