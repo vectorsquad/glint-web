@@ -73,7 +73,7 @@ const Dashboard: React.FC = () => {
 
     try {
       const response = await axios.post('/api/v1/createDeck', {
-        deck_name: name
+        name: name
       }, {
         headers: {
           'Authorization': `Bearer ${user.token}`
@@ -83,7 +83,7 @@ const Dashboard: React.FC = () => {
       const deckId = response.data._id;
 
       for (const card of cards) {
-        await axios.post('/api/v1/createCard', {
+        await axios.post('/api/v1/create', {
           id_deck: deckId,
           side_front: card.front,
           side_back: card.back
@@ -93,7 +93,6 @@ const Dashboard: React.FC = () => {
           }
         });
       }
-
       fetchDecks();
     } catch (error) {
       console.error('Error creating deck:', error);

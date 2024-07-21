@@ -91,7 +91,7 @@ const SignupPage: React.FC = () => {
           username: username,
           password_hash: password,
         });
-        if (response.status === 200) {
+        if (response.status >= 200 && response.status <300) {
           alert('Please check your email to verify your account.');
           navigate('/login');
         } else {
