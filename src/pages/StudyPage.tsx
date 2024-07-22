@@ -31,26 +31,31 @@ const StudyPage: React.FC = () => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
-  useEffect(() => {
-    const fetchDeck = async () => {
-      setIsLoading(true);
-      setError('');
-      try {
-        const response = await axios.get(`/api/v1/getDeck/${deckId}`, {
+// In the useEffect hook, replace the axios.get with axios.post
+useEffect(() => {
+  const fetchDeck = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const response = await axios.post('/api/v1/findDeck', 
+        { _id: deckId },
+        {
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
-        });
-        setDeck(response.data);
-      } catch (error) {
-        console.error('Error fetching deck:', error);
-        setError('Failed to fetch deck. Please try again.');
-      }
-      setIsLoading(false);
-    };
+        }
+      );
+      // The API returns an array, so we need to get the first item
+      setDeck(response.data[0]);
+    } catch (error) {
+      console.error('Error fetching deck:', error);
+      setError('Failed to fetch deck. Please try again.');
+    }
+    setIsLoading(false);
+  };
 
-    fetchDeck();
-  }, [deckId, user.token]);
+  fetchDeck();
+}, [deckId, user.token]);
 
   const openCreateModal = () => {
     setEditingCard(null);
