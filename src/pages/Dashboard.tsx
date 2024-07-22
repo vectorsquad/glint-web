@@ -151,6 +151,12 @@ const Dashboard: React.FC = () => {
     fetchDecks(searchTerm);
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleSearchClick();
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -167,6 +173,7 @@ const Dashboard: React.FC = () => {
                 placeholder="Search decks..." 
                 value={searchTerm} 
                 onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleKeyDown}
                 ref={searchInputRef}
               />
               <button onClick={handleSearchClick}>Search</button>
