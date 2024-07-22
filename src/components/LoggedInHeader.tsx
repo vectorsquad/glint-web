@@ -8,9 +8,7 @@ const Header: React.FC = () => {
     <header className="header">
       <div className="container">
         <Link to="/dashboard" className="logo">Glint</Link>
-        <input type="text" placeholder='Search' className="search-bar" />
         <nav>
-          
           <Link to="/" className="login-button">Log Out</Link>
         </nav>
       </div>

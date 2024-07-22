@@ -187,6 +187,7 @@ const EditDeckPage: React.FC = () => {
           ))}
         </ul>
       )}
+      <button onClick={() => navigate('/dashboard')}>Return to Dashboard</button>
     </div>
   );
 };

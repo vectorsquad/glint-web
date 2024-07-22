@@ -190,7 +190,7 @@ const Dashboard: React.FC = () => {
               onChange={(e) => setSearchTerm(e.target.value)} 
               onKeyPress={handleSearchKeyPress}
             />
-            <p>Debug: {decks.length} decks loaded</p>
+            <p>{decks.length} decks loaded</p>
             <div className="deck-cards-container">
               {decks.map((deck) => (
                 <div key={deck._id} className="deck-card">
