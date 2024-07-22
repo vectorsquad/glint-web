@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [user, searchTerm]);
+  }, [user]);
 
   useEffect(() => {
     if (user) {
