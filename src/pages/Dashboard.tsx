@@ -27,7 +27,7 @@ const Dashboard: React.FC = () => {
   const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
-  const fetchDecks = useCallback(async () => {
+  const fetchDecks = useCallback(async (searchTerm: string) => {
     if (!user) {
       setError('User ID not available. Please log in.');
       return;
@@ -61,7 +61,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      fetchDecks();
+      fetchDecks('');
     }
   }, [user, fetchDecks]);
 
@@ -93,7 +93,7 @@ const Dashboard: React.FC = () => {
           }
         });
       }
-      fetchDecks();
+      fetchDecks(searchTerm);
     } catch (error) {
       console.error('Error creating deck:', error);
       setError('Failed to create deck. Please try again.');
@@ -122,7 +122,7 @@ const Dashboard: React.FC = () => {
           }
         });
 
-        fetchDecks();
+        fetchDecks(searchTerm);
       } catch (error) {
         console.error('Error deleting deck:', error);
         setError('Failed to delete deck. Please try again.');
@@ -148,7 +148,7 @@ const Dashboard: React.FC = () => {
   };
 
   const handleSearchClick = () => {
-    fetchDecks();
+    fetchDecks(searchTerm);
   };
 
   return (
