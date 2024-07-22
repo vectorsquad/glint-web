@@ -59,13 +59,10 @@ const Dashboard: React.FC = () => {
     if (user) {
       fetchDecks();
     }
-  }, [user, fetchDecks]);
-
-  useEffect(() => {
     if (searchInputRef.current) {
       searchInputRef.current.focus();
     }
-  }, [searchTerm]);
+  }, [user, fetchDecks]);
 
   const handleCreateDeck = async (name: string, cards: ICard[]) => {
     if (!user) {
