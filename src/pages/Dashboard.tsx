@@ -194,7 +194,7 @@ const Dashboard: React.FC = () => {
               ))}
               <div className="deck-card add-set-card" onClick={openCreateModal}>
                 <span className="plus-icon">+</span>
-                <p>Create Sets</p>
+                <p>Create Decks</p>
               </div>
             </div>
           </>
