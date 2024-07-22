@@ -24,6 +24,7 @@ const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   const fetchDecks = useCallback(async () => {
@@ -59,6 +60,12 @@ const Dashboard: React.FC = () => {
       fetchDecks();
     }
   }, [user, fetchDecks]);
+
+  useEffect(() => {
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [searchTerm]);
 
   const handleCreateDeck = async (name: string, cards: ICard[]) => {
     if (!user) {
@@ -157,6 +164,7 @@ const Dashboard: React.FC = () => {
               placeholder="Search decks..." 
               value={searchTerm} 
               onChange={(e) => setSearchTerm(e.target.value)}
+              ref={searchInputRef}
             />
             <p>{decks.length} decks loaded</p>
             <div className="deck-cards-container">
