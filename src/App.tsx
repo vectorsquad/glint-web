@@ -7,7 +7,7 @@ import Dashboard from './pages/Dashboard';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import StudyPage from './pages/StudyPage';
-import EditDeckPage from './pages/EditSet';
+import EditDeckPage from './pages/EditDeckPage';
 import './styles/App.css';
 import { AuthProvider } from './context/AuthContext';
 import InitialAuthCheck from './components/InitialAuthCheck';
