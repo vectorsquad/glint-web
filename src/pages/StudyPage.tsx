@@ -1,4 +1,3 @@
-// src/pages/StudyPage.tsx
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -31,31 +30,29 @@ const StudyPage: React.FC = () => {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
-// In the useEffect hook, replace the axios.get with axios.post
-useEffect(() => {
-  const fetchDeck = async () => {
-    setIsLoading(true);
-    setError('');
-    try {
-      const response = await axios.post('/api/v1/findDeck', 
-        { _id: deckId },
-        {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
+  useEffect(() => {
+    const fetchDeck = async () => {
+      setIsLoading(true);
+      setError('');
+      try {
+        const response = await axios.post('/api/v1/findDeck', 
+          { _id: deckId },
+          {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
           }
-        }
-      );
-      // The API returns an array, so we need to get the first item
-      setDeck(response.data[0]);
-    } catch (error) {
-      console.error('Error fetching deck:', error);
-      setError('Failed to fetch deck. Please try again.');
-    }
-    setIsLoading(false);
-  };
+        );
+        setDeck(response.data[0]); // The API returns an array, so we need to get the first item
+      } catch (error) {
+        console.error('Error fetching deck:', error);
+        setError('Failed to fetch deck. Please try again.');
+      }
+      setIsLoading(false);
+    };
 
-  fetchDeck();
-}, [deckId, user.token]);
+    fetchDeck();
+  }, [deckId, user.token]);
 
   const openCreateModal = () => {
     setEditingCard(null);
