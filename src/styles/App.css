@@ -26,6 +26,8 @@ a {
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
+  width: 400px; /* Fixed width */
+  margin: 50px auto; /* Centered and with some margin on top and bottom */
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
@@ -100,6 +102,7 @@ p {
   width: 80vw;
   height: auto;
   margin-bottom: 20px; /* Add margin below the logo */
+  margin: 50px auto; /* Centered and with some margin on top and bottom */
 }
 
 .input-container {
