@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import PomodoroTimer from '../components/PomodoroTimer';
 import '../styles/StudyPage.css';
 import { AuthContext } from '../context/AuthContext';
 
@@ -77,7 +76,6 @@ const StudyPage: React.FC = () => {
         deck && currentCard && (
           <>
             <h1>{deck.name}</h1>
-            <PomodoroTimer />
             <div className="card-navigation">
               <button onClick={goToPreviousCard}>Previous</button>
               <button onClick={goToNextCard}>Next</button>

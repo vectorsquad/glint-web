@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PomodoroTimer from './PomodoroTimer';
 
 const StudySession: React.FC = () => {
   const [time, setTime] = useState(25 * 60); // 25 minutes in seconds
@@ -36,7 +35,6 @@ const StudySession: React.FC = () => {
       </div>
       <button onClick={handleStartPause}>{isActive ? 'Pause' : 'Start'}</button>
       <button onClick={handleReset}>Reset</button>
-      <PomodoroTimer />
     </div>
   );
 };
