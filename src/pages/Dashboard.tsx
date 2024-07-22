@@ -24,6 +24,7 @@ const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   const fetchDecks = useCallback(async () => {
@@ -46,6 +47,10 @@ const Dashboard: React.FC = () => {
       );
       console.log('API Response:', response.data); // For debugging
       setDecks(response.data);
+
+      if (searchInputRef.current) {
+        searchInputRef.current.focus();
+      }
     } catch (error) {
       console.error('Error fetching decks:', error);
       setError('Failed to fetch decks. Please try again.');
@@ -162,6 +167,7 @@ const Dashboard: React.FC = () => {
                 placeholder="Search decks..." 
                 value={searchTerm} 
                 onChange={(e) => setSearchTerm(e.target.value)}
+                ref={searchInputRef}
               />
               <button onClick={handleSearchClick}>Search</button>
             </div>
