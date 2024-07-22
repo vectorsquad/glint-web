@@ -69,9 +69,11 @@ const LoginPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <p className="forgot-password" onClick={handleResetPassword}>
-          Forgot Password?
-          </p>
+          <div className="forgot-password-container">
+            <p className="forgot-password" onClick={handleResetPassword}>
+              Forgot Password?
+            </p>
+          </div>
           <button type="submit">Log In</button>
         </form>
         <p className="link">New here?<Link to="/signup">Sign up!</Link></p>

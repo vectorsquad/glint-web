@@ -52,7 +52,7 @@ button, .black-button {
 }
 
 button:hover, .black-button:hover {
-  background-color: #333333; /* Slightly lighter black */
+  background-color: #0FAA48; /* Slightly lighter black */
 }
 
 p {
@@ -118,13 +118,17 @@ p {
   margin-left: 10px;
 }
 
+.forgot-password-container {
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .forgot-password {
   color: #040404; /* Black text color */
-  text-align: right;
   cursor: pointer;
-  margin-top: 5px;
+  margin-top: 3px;
+  margin-bottom: 3px;
   font-size: 14px;
-  display: block; /* Ensure it takes up the full width */
-  width: 50%; /* Match the input width */
-  margin-left: auto; /* Align to the right */
 }
