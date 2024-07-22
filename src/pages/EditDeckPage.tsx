@@ -144,6 +144,7 @@ const EditDeckPage: React.FC = () => {
             value={newName}
             onChange={handleNameChange}
             required
+            className="edit-deck-name-input"
           />
         </label>
         <button type="submit">Update Deck Name</button>
@@ -153,24 +154,24 @@ const EditDeckPage: React.FC = () => {
       {cards.length === 0 ? (
         <p>No cards found in this deck.</p>
       ) : (
-        <ul className="cards-list">
+        <ul className="edit-cards-list">
           {cards.map((card) => (
-            <li key={card._id} className="card-item">
+            <li key={card._id} className="edit-card-item">
               <input
                 type="text"
                 value={card.side_front}
                 onChange={(e) => handleCardChange(card._id, 'side_front', e.target.value)}
                 onBlur={() => handleCardUpdate(card)}
-                className="card-input"
+                className="edit-card-input"
               />
               <input
                 type="text"
                 value={card.side_back}
                 onChange={(e) => handleCardChange(card._id, 'side_back', e.target.value)}
                 onBlur={() => handleCardUpdate(card)}
-                className="card-input"
+                className="edit-card-input"
               />
-              <button onClick={() => handleCardDelete(card._id)} className="delete-button">Delete</button>
+              <button onClick={() => handleCardDelete(card._id)} className="edit-delete-button">Delete</button>
             </li>
           ))}
         </ul>

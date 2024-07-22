@@ -2,18 +2,27 @@
     padding: 20px;
   }
   
-  .cards-list {
+  .edit-deck-name-input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+  }
+  
+  .edit-cards-list {
     list-style-type: none;
     padding: 0;
   }
   
-  .card-item {
+  .edit-card-item {
     display: flex;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  .card-input {
+  .edit-card-input {
     flex: 1;
     padding: 10px;
     margin-right: 10px;
@@ -21,7 +30,7 @@
     border-radius: 4px;
   }
   
-  .delete-button {
+  .edit-delete-button {
     background-color: #ff4d4d;
     color: white;
     border: none;
@@ -30,7 +39,7 @@
     cursor: pointer;
   }
   
-  .delete-button:hover {
+  .edit-delete-button:hover {
     background-color: #ff1a1a;
   }
   
