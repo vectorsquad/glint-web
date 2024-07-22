@@ -1,0 +1,36 @@
+.edit-deck-container {
+    padding: 20px;
+  }
+  
+  .cards-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .card-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .card-input {
+    flex: 1;
+    padding: 10px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .delete-button {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .delete-button:hover {
+    background-color: #ff1a1a;
+  }
+  

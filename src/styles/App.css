@@ -43,7 +43,7 @@ input[type="text"], input[type="email"], input[type="password"] {
 button, .black-button {
   width: 97.5%;
   padding: 10px;
-  background-color: #040404; /* Dark background */
+  background-color: #15DB63; /* Dark background */
   border: none;
   color: #FEFEFE; /* Light text */
   border-radius: 4px;

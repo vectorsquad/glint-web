@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import '../styles/EditDeckPage.css';
 
 interface IDeck {
   _id: string;
@@ -28,7 +29,6 @@ const EditDeckPage: React.FC = () => {
   const [newName, setNewName] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState('');
-  const [editingCard, setEditingCard] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchDeckAndCards = async () => {
@@ -90,8 +90,10 @@ const EditDeckPage: React.FC = () => {
     }
   };
 
-  const handleCardEdit = (cardId: string) => {
-    setEditingCard(cardId);
+  const handleCardChange = (cardId: string, field: 'side_front' | 'side_back', value: string) => {
+    setCards(cards.map(card => 
+      card._id === cardId ? { ...card, [field]: value } : card
+    ));
   };
 
   const handleCardUpdate = async (card: ICard) => {
@@ -107,17 +109,10 @@ const EditDeckPage: React.FC = () => {
       );
 
       setCards(cards.map(c => c._id === card._id ? card : c));
-      setEditingCard(null);
     } catch (err) {
       console.error('Error updating card:', err);
       setError('Failed to update card. Please try again.');
     }
-  };
-
-  const handleCardChange = (cardId: string, field: 'side_front' | 'side_back', value: string) => {
-    setCards(cards.map(card => 
-      card._id === cardId ? { ...card, [field]: value } : card
-    ));
   };
 
   const handleCardDelete = async (cardId: string) => {
@@ -139,7 +134,7 @@ const EditDeckPage: React.FC = () => {
   if (!deck) return <div>Deck not found</div>;
 
   return (
-    <div>
+    <div className="edit-deck-container">
       <h1>Edit Deck</h1>
       <form onSubmit={handleSubmit}>
         <label>
@@ -158,31 +153,24 @@ const EditDeckPage: React.FC = () => {
       {cards.length === 0 ? (
         <p>No cards found in this deck.</p>
       ) : (
-        <ul>
+        <ul className="cards-list">
           {cards.map((card) => (
-            <li key={card._id}>
-              {editingCard === card._id ? (
-                <div>
-                  <input
-                    type="text"
-                    value={card.side_front}
-                    onChange={(e) => handleCardChange(card._id, 'side_front', e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    value={card.side_back}
-                    onChange={(e) => handleCardChange(card._id, 'side_back', e.target.value)}
-                  />
-                  <button onClick={() => handleCardUpdate(card)}>Save</button>
-                  <button onClick={() => setEditingCard(null)}>Cancel</button>
-                </div>
-              ) : (
-                <div>
-                  <strong>Front:</strong> {card.side_front} | <strong>Back:</strong> {card.side_back}
-                  <button onClick={() => handleCardEdit(card._id)}>Edit</button>
-                  <button onClick={() => handleCardDelete(card._id)}>Delete</button>
-                </div>
-              )}
+            <li key={card._id} className="card-item">
+              <input
+                type="text"
+                value={card.side_front}
+                onChange={(e) => handleCardChange(card._id, 'side_front', e.target.value)}
+                onBlur={() => handleCardUpdate(card)}
+                className="card-input"
+              />
+              <input
+                type="text"
+                value={card.side_back}
+                onChange={(e) => handleCardChange(card._id, 'side_back', e.target.value)}
+                onBlur={() => handleCardUpdate(card)}
+                className="card-input"
+              />
+              <button onClick={() => handleCardDelete(card._id)} className="delete-button">Delete</button>
             </li>
           ))}
         </ul>

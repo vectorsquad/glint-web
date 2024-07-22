@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useContext, useRef} from 'react';
+import React, { useState, useEffect, useCallback, useContext, useRef } from 'react';
 import axios from 'axios';
 import Modal from '../components/Modal';
 import Header from '../components/LoggedInHeader';
@@ -38,7 +38,7 @@ const Dashboard: React.FC = () => {
     try {
       const response = await axios.post<IDeck[]>(
         '/api/v1/findDeck',
-        { name: searchTerm },  // Changed from deck_name to name
+        { name: searchTerm },
         {
           headers: {
             'Authorization': `Bearer ${user.token}`
@@ -168,6 +168,11 @@ const Dashboard: React.FC = () => {
         ) : (
           <>
             <div className="search-container">
+              <img
+                src="/search-interface-symbol.png"
+                alt="Search"
+                className="search-icon"
+              />
               <input 
                 type="text" 
                 placeholder="Search decks..." 
@@ -176,7 +181,6 @@ const Dashboard: React.FC = () => {
                 onKeyDown={handleKeyDown}
                 ref={searchInputRef}
               />
-              <button onClick={handleSearchClick}>Search</button>
             </div>
             <p>{decks.length} decks loaded</p>
             <div className="deck-cards-container">
