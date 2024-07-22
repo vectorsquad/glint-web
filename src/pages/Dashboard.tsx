@@ -24,7 +24,6 @@ const Dashboard: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   const fetchDecks = useCallback(async () => {
@@ -58,9 +57,6 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     if (user) {
       fetchDecks();
-    }
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
     }
   }, [user, fetchDecks]);
 
@@ -146,6 +142,10 @@ const Dashboard: React.FC = () => {
     closeModal();
   };
 
+  const handleSearchClick = () => {
+    fetchDecks();
+  };
+
   return (
     <div>
       <Header />
@@ -156,13 +156,15 @@ const Dashboard: React.FC = () => {
           <p>Loading...</p>
         ) : (
           <>
-            <input 
-              type="text" 
-              placeholder="Search decks..." 
-              value={searchTerm} 
-              onChange={(e) => setSearchTerm(e.target.value)}
-              ref={searchInputRef}
-            />
+            <div className="search-container">
+              <input 
+                type="text" 
+                placeholder="Search decks..." 
+                value={searchTerm} 
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button onClick={handleSearchClick}>Search</button>
+            </div>
             <p>{decks.length} decks loaded</p>
             <div className="deck-cards-container">
               {decks.map((deck) => (
