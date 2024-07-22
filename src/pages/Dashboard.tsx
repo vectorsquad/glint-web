@@ -106,19 +106,23 @@ const Dashboard: React.FC = () => {
       return;
     }
 
-    try {
-      await axios.post('/api/v1/deleteDeck', {
-        _id: deckId
-      }, {
-        headers: {
-          'Authorization': `Bearer ${user.token}`
-        }
-      });
+    const isConfirmed = window.confirm('Are you sure you want to delete this deck?');
 
-      fetchDecks();
-    } catch (error) {
-      console.error('Error deleting deck:', error);
-      setError('Failed to delete deck. Please try again.');
+    if (isConfirmed) {
+      try {
+        await axios.post('/api/v1/deleteDeck', {
+          _id: deckId
+        }, {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        });
+
+        fetchDecks();
+      } catch (error) {
+        console.error('Error deleting deck:', error);
+        setError('Failed to delete deck. Please try again.');
+      }
     }
   };
 
@@ -184,6 +188,7 @@ const Dashboard: React.FC = () => {
               placeholder="Search decks..." 
               value={searchTerm} 
               onChange={(e) => setSearchTerm(e.target.value)} 
+              onKeyPress={handleSearchKeyPress}
             />
             <p>Debug: {decks.length} decks loaded</p>
             <div className="deck-cards-container">
