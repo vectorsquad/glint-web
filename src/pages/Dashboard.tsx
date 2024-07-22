@@ -160,7 +160,7 @@ const Dashboard: React.FC = () => {
   }, 300), [fetchDecks]);
 
   useEffect(() => {
-    debouncedFetchDecks(searchTerm);
+    debouncedFetchDecks();
     return () => {
       if (debounceTimeoutRef.current) {
         clearTimeout(debounceTimeoutRef.current);
@@ -170,9 +170,6 @@ const Dashboard: React.FC = () => {
 
   const handleSearchKeyPress: React.ChangeEventHandler<HTMLInputElement> = (event) => {
     setSearchTerm(event.target.value);
-    if (searchInputRef.current) {
-      searchInputRef.current.focus();
-    }
   };
 
   return (
