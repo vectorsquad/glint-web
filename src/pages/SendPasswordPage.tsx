@@ -15,9 +15,14 @@ const sendPasswordPage: React.FC = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/v1/sendPasswordRecovery', { usernameOrEmail });
+      let tryResponse = await axios.post('/api/v1/sendPasswordRecovery', { email: usernameOrEmail });
 
-      if (response.status === 200) {
+      if(tryResponse.status === 404)
+        tryResponse = await axios.post('/api/v1/sendPasswordRecovery', { username: usernameOrEmail });
+
+      const response = tryResponse;
+
+      if (response.status >= 200 || response.status < 300) {
         alert("An email to reset your password was sent.");
         navigate('/login');
       } else {
