@@ -25,6 +25,7 @@ const Dashboard: React.FC = () => {
   const [error, setError] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const debounceTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate();
 
   const fetchDecks = useCallback(async () => {
@@ -167,9 +168,10 @@ const Dashboard: React.FC = () => {
     };
   }, [searchTerm, debouncedFetchDecks]);
 
-  const handleSearchKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      fetchDecks();
+  const handleSearchKeyPress: React.ChangeEventHandler<HTMLInputElement> = (event) => {
+    setSearchTerm(event.target.value);
+    if (searchInputRef.current) {
+      searchInputRef.current.focus();
     }
   };
 
@@ -187,8 +189,8 @@ const Dashboard: React.FC = () => {
               type="text" 
               placeholder="Search decks..." 
               value={searchTerm} 
-              onChange={(e) => setSearchTerm(e.target.value)} 
-              onKeyPress={handleSearchKeyPress}
+              onChange={handleSearchKeyPress} 
+              ref={searchInputRef}
             />
             <p>{decks.length} decks loaded</p>
             <div className="deck-cards-container">
