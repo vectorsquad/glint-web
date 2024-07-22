@@ -7,6 +7,7 @@ import Dashboard from './pages/Dashboard';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import StudyPage from './pages/StudyPage';
+import EditDeckPage from './pages/EditSet';
 import './styles/App.css';
 import { AuthProvider } from './context/AuthContext';
 import InitialAuthCheck from './components/InitialAuthCheck';
@@ -24,6 +25,7 @@ const App: React.FC = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
             <Route path="/study/:deckId" element={<StudyPage />} />
+            <Route path="/edit/:deckId" element={<EditDeckPage />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/updatePassword" element={<ResetPasswordPage/>} />
             <Route path="/sendPassword" element={<SendPassword />} />
