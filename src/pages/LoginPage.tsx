@@ -48,20 +48,6 @@ const LoginPage: React.FC = () => {
     navigate('/sendPassword');
   };
 
-  const resetPasswordButtonStyle = {
-    marginTop: '10px',
-    padding: '8px 12px',
-    backgroundColor: '#15db63',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    transition: 'background-color 0.3s, box-shadow 0.3s',
-    fontSize: '14px',
-    fontWeight: 'bold',
-    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.1)',
-  };
-
   return (
     <div>
       <Header />
@@ -83,15 +69,12 @@ const LoginPage: React.FC = () => {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+          <p className="forgot-password" onClick={handleResetPassword}>
+          Forgot Password?
+          </p>
           <button type="submit">Log In</button>
         </form>
-        <p className="link">New here? <Link to="/signup">Sign up!</Link></p>
-        <button 
-          onClick={handleResetPassword} 
-          style={resetPasswordButtonStyle}
-        >
-          Reset Password
-        </button>
+        <p className="link">New here?<Link to="/signup">Sign up!</Link></p>
       </div>
     </div>
   );

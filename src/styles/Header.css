@@ -1,6 +1,5 @@
 .header {
     color: #040404; /* Dark text color */
-    padding: 10px 0;
   }
   
   .header .container {
@@ -15,16 +14,7 @@
     text-decoration: none;
     margin-top: 20px;
   }
-  
-  .header .search-bar{
-    width: 300px;
-    padding: 10px 20px; 
-    font-size: 14px; 
-    border: 1px solid #040404; 
-    border-radius: 4px;
-  }
 
-  
   .header nav a {
     color: #040404; /* Dark text color */
     margin-left: 20px;

@@ -181,7 +181,7 @@ const SignupPage: React.FC = () => {
           {errorMessage.password && <p className="validation-message">{errorMessage.password}</p>}
           <button type="submit">Sign Up</button>
         </form>
-        <p className="link">Already have an account? <Link to="/login">Log in!</Link></p>
+        <p className="link">Already have an account?<Link to="/login">Log in!</Link></p>
       </div>
     </div>
   );

@@ -1,5 +1,3 @@
-/* src/styles/App.css */
-
 body {
   font-family: 'Arial', sans-serif;
   margin: 0;
@@ -9,7 +7,6 @@ body {
 }
 
 h1 {
-  margin-left: 10px;
   color: #040404; /* Dark text color */
 }
 
@@ -20,7 +17,6 @@ a {
 }
 
 .container {
-  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
@@ -28,7 +24,7 @@ a {
 .form-container {
   background-color: #FEFEFE; /* Light background color */
   padding: 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
 }
 
@@ -73,6 +69,16 @@ p {
   color: #040404; /* Dark text color */
 }
 
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.subtitle {
+  color: #828282;
+}
+
 .home h1 {
   color: #040404; /* Dark text color */
 }
@@ -90,8 +96,8 @@ p {
   background-color: #333333; /* Slightly lighter black */
 }
 
-.logo {
-  max-width: 500px;
+.main-logo {
+  width: 80vw;
   height: auto;
   margin-bottom: 20px; /* Add margin below the logo */
 }
@@ -110,4 +116,15 @@ p {
 .validation-message {
   color: red;
   margin-left: 10px;
+}
+
+.forgot-password {
+  color: #040404; /* Black text color */
+  text-align: right;
+  cursor: pointer;
+  margin-top: 5px;
+  font-size: 14px;
+  display: block; /* Ensure it takes up the full width */
+  width: 50%; /* Match the input width */
+  margin-left: auto; /* Align to the right */
 }
