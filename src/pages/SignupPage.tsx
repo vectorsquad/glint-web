@@ -24,6 +24,7 @@ const SignupPage: React.FC = () => {
     username: '',
     password: '',
   });
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
 
   const handleValidation = (name: string, value: string) => {
@@ -103,75 +104,85 @@ const SignupPage: React.FC = () => {
     }
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <div>
       <Header />
       <div className="form-container">
         <h1>Sign Up</h1>
         <form onSubmit={handleSubmit}>
-            <div className="input-container">
-              <input
-                type="text"
-                placeholder="First Name"
-                value={firstName}
-                onChange={(e) => {
-                  setFirstName(e.target.value);
-                  handleValidation('firstName', e.target.value);
-                }}
-                required
-              />
-              {!validity.firstName && <span className="regexError">x</span>}
-            </div>
-            <div className='input-container'>
-              <input
-                type="text"
-                placeholder="Last Name"
-                value={lastName}
-                onChange={(e) => {
-                  setLastName(e.target.value);
-                  handleValidation('lastName', e.target.value);
-                }}
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName}
+              onChange={(e) => {
+                setFirstName(e.target.value);
+                handleValidation('firstName', e.target.value);
+              }}
               required
-              />
-              {!validity.lastName && <span className="regexError">x</span>}
-            </div>
-            <div className='input-container'>
-              <input
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  handleValidation('email', e.target.value);
-                }}
-                required
-              />
-              {!validity.email && <span className="regexError">x</span>}
-            </div>
-            <div className="input-container">
-              <input
-                type="text"
-                placeholder="Username"
-                value={username}
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                  handleValidation('username', e.target.value);
-                }}
-                required
-              />
-              {!validity.username && <span className="regexError">x</span>}
-            </div>
-            <div className="input-container">
-              <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  handleValidation('password', e.target.value);
-                }}
-                required
-              />
+            />
+            {!validity.firstName && <span className="regexError">x</span>}
+          </div>
+          <div className='input-container'>
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName}
+              onChange={(e) => {
+                setLastName(e.target.value);
+                handleValidation('lastName', e.target.value);
+              }}
+              required
+            />
+            {!validity.lastName && <span className="regexError">x</span>}
+          </div>
+          <div className='input-container'>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                handleValidation('email', e.target.value);
+              }}
+              required
+            />
+            {!validity.email && <span className="regexError">x</span>}
+          </div>
+          <div className="input-container">
+            <input
+              type="text"
+              placeholder="Username"
+              value={username}
+              onChange={(e) => {
+                setUsername(e.target.value);
+                handleValidation('username', e.target.value);
+              }}
+              required
+            />
+            {!validity.username && <span className="regexError">x</span>}
+          </div>
+          <div className="input-container">
+            <input
+              type={passwordVisible ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                handleValidation('password', e.target.value);
+              }}
+              required
+            />
+            <img
+              src={passwordVisible ? '/visible.png' : '/hide.png'}
+              alt={passwordVisible ? 'Hide password' : 'Show password'}
+              className="password-toggle-icon"
+              onClick={togglePasswordVisibility}
+            />
             {!validity.password && <span className="regexError">x</span>}
           </div>
           {errorMessage.firstName && <p className="validation-message">{errorMessage.firstName}</p>}

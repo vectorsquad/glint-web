@@ -9,6 +9,7 @@ const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
 
@@ -48,6 +49,10 @@ const LoginPage: React.FC = () => {
     navigate('/sendPassword');
   };
 
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
+
   return (
     <div>
       <Header />
@@ -62,13 +67,21 @@ const LoginPage: React.FC = () => {
             onChange={(e) => setUsername(e.target.value)}
             required
           />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className="input-container">
+            <input
+              type={passwordVisible ? 'text' : 'password'}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <img
+              src={passwordVisible ? '/visible.png' : '/hide.png'}
+              alt={passwordVisible ? 'Hide password' : 'Show password'}
+              className="password-toggle-icon"
+              onClick={togglePasswordVisibility}
+            />
+          </div>
           <div className="forgot-password-container">
             <p className="forgot-password" onClick={handleResetPassword}>
               Forgot Password?
