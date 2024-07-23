@@ -5,12 +5,10 @@ import '../styles/StudyPage.css';
 import { AuthContext } from '../context/AuthContext';
 
 interface ICard {
-  id: string;
+  _id: string;
   side_front: string;
   side_back: string;
-  quantity_cards_left: number;
-  quantity_cards_total: number;
-  message: string;
+  deck_index: number;
 }
 
 interface IDeck {
@@ -33,7 +31,8 @@ const StudyPage: React.FC = () => {
     setIsLoading(true);
     setError('');
     try {
-      const response = await axios.post('/api/v1/findDeck', 
+      const deckResponse = await axios.post<IDeck[]>(
+        '/api/v1/findDeck',
         { _id: deckId },
         {
           headers: {
@@ -41,58 +40,42 @@ const StudyPage: React.FC = () => {
           }
         }
       );
-      setDeck(response.data[0]); // The API returns an array, so we need to get the first item
-    } catch (error) {
-      console.error('Error fetching deck:', error);
-      setError('Failed to fetch deck details. Please try again.');
-    }
-    setIsLoading(false);
-  };
 
-  const fetchNextCard = async () => {
-    setIsLoading(true);
-    setError('');
-    try {
-      console.log('Sending request with:', { id: user.id, deckId });
-      const response = await axios.post('/api/v1/runApp', 
-        { id: user.id, 
-          deckId: deckId
-        }, {
-          headers: {
-            'Authorization': `Bearer ${user.token}`
+      if (deckResponse.data.length > 0) {
+        setDeck(deckResponse.data[0]);
+
+        const cardsResponse = await axios.post<ICard[]>(
+          '/api/v1/find',
+          { id_deck: deckId },
+          {
+            headers: {
+              'Authorization': `Bearer ${user.token}`
+            }
           }
-        }
-      );
-      const card: ICard = response.data;
-      if (card.message.includes("no more cards remaining")) {
-        setError(card.message);
+        );
+
+        setCards(cardsResponse.data);
       } else {
-        setCards((prevCards) => [...prevCards, card]);
+        setError('Deck not found');
       }
-    } catch (error) {
-      console.error('Error fetching card:', error);
-      setError('Failed to fetch card. Please try again.');
+    } catch (err) {
+      console.error('Error fetching deck and cards:', err);
+      setError('Failed to fetch deck and cards. Please try again.');
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   useEffect(() => {
     fetchDeckDetails();
-    fetchNextCard();
   }, [deckId, user.token]);
 
   const goToNextCard = () => {
-    if (currentCardIndex < cards.length - 1) {
-      setCurrentCardIndex((prevIndex) => prevIndex + 1);
-    } else {
-      fetchNextCard();
-    }
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
   const goToPreviousCard = () => {
-    if (currentCardIndex > 0) {
-      setCurrentCardIndex((prevIndex) => prevIndex - 1);
-    }
+    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
   };
 
   const handleCardClick = () => {
