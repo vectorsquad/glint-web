@@ -54,8 +54,9 @@ const StudyPage: React.FC = () => {
     setError('');
     try {
       const response = await axios.post('/api/v1/runApp', 
-        { id: user.id, deckId },
-        {
+        { id: user.id, 
+          deckId: deckId
+        }, {
           headers: {
             'Authorization': `Bearer ${user.token}`
           }
