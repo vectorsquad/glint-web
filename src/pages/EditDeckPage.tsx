@@ -175,7 +175,12 @@ const EditDeckPage: React.FC = () => {
       return;
     }
 
-    if (cards.length < 2 || cards.some((card) => !card.side_front.trim() || !card.side_back.trim())) {
+    if (cards.some((card) => !card.side_front.trim() || !card.side_back.trim())) {
+      setError('Please remove any empty cards');
+      return;
+    }
+
+    if (cards.length < 2) {
       setError('At least 2 cards with both front and back filled are required.');
       return;
     }

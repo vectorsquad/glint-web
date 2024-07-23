@@ -58,8 +58,8 @@
 }
 
 .nav-icon {
-  width: 50px; /* Increased size for better visibility */
-  height: 50px; /* Increased size for better visibility */
+  width: 40px; /* Decreased width */
+  height: 50px; /* Keep height same for visibility */
   cursor: pointer;
   margin: 0 20px;
   filter: invert(15%) sepia(10%) saturate(300%) hue-rotate(80deg) brightness(90%) contrast(90%); /* Apply the Black Olive color */
