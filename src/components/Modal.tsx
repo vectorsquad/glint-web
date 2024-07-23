@@ -1,5 +1,4 @@
-// src/components/Modal.tsx
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/Modal.css';
 
 interface ICard {
@@ -30,6 +29,15 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, children }) => {
 
   const addCard = () => {
     setCards([...cards, { front: '', back: '' }]);
+  };
+
+  const deleteCard = (index: number) => {
+    if (cards.length > 2) {
+      const updatedCards = cards.filter((_, i) => i !== index);
+      setCards(updatedCards);
+    } else {
+      setError('At least 2 cards are required.');
+    }
   };
 
   const handleSubmit = () => {
@@ -85,6 +93,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, children }) => {
           <div className="cards-container">
             {cards.map((card, index) => (
               <div key={index} className="card-input">
+                <img
+                  src="/delete.png"
+                  alt="Delete"
+                  className="delete-icon"
+                  onClick={() => deleteCard(index)}
+                />
                 <h3>Card {index + 1}</h3>
                 <div className="input-pair">
                   <label htmlFor={`front-${index}`}>Front</label>

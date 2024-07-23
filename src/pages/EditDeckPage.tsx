@@ -116,17 +116,32 @@ const EditDeckPage: React.FC = () => {
   };
 
   const handleCardDelete = async (cardId: string) => {
-    try {
-      await axios.post<void | ErrorResponse>(
-        '/api/v1/delete',
-        { _id: cardId }
-      );
+    if (cards.length > 2) {
+      try {
+        await axios.post<void | ErrorResponse>(
+          '/api/v1/delete',
+          { _id: cardId }
+        );
 
-      setCards(cards.filter(card => card._id !== cardId));
-    } catch (err) {
-      console.error('Error deleting card:', err);
-      setError('Failed to delete card. Please try again.');
+        setCards(cards.filter(card => card._id !== cardId));
+      } catch (err) {
+        console.error('Error deleting card:', err);
+        setError('Failed to delete card. Please try again.');
+      }
+    } else {
+      setError('Cannot delete the last two cards.');
     }
+  };
+
+  const handleAddCard = () => {
+    const newCard: ICard = {
+      _id: `${Date.now()}`, // Use a unique ID generator for new cards
+      id_deck: deckId!,
+      side_front: '',
+      side_back: '',
+      deck_index: cards.length
+    };
+    setCards([...cards, newCard]);
   };
 
   if (isLoading) return <div>Loading...</div>;
@@ -154,28 +169,43 @@ const EditDeckPage: React.FC = () => {
       {cards.length === 0 ? (
         <p>No cards found in this deck.</p>
       ) : (
-        <ul className="edit-cards-list">
-          {cards.map((card) => (
-            <li key={card._id} className="edit-card-item">
-              <input
-                type="text"
-                value={card.side_front}
-                onChange={(e) => handleCardChange(card._id, 'side_front', e.target.value)}
-                onBlur={() => handleCardUpdate(card)}
-                className="edit-card-input"
+        <div className="cards-container">
+          {cards.map((card, index) => (
+            <div key={index} className="card-input">
+              <img
+                src="/delete.png"
+                alt="Delete"
+                className="delete-icon"
+                onClick={() => handleCardDelete(card._id)}
               />
-              <input
-                type="text"
-                value={card.side_back}
-                onChange={(e) => handleCardChange(card._id, 'side_back', e.target.value)}
-                onBlur={() => handleCardUpdate(card)}
-                className="edit-card-input"
-              />
-              <button onClick={() => handleCardDelete(card._id)} className="edit-delete-button">Delete</button>
-            </li>
+              <h3>Card {index + 1}</h3>
+              <div className="input-pair">
+                <label htmlFor={`front-${index}`}>Front</label>
+                <textarea
+                  id={`front-${index}`}
+                  placeholder="Enter term"
+                  value={card.side_front}
+                  onChange={(e) => handleCardChange(card._id, 'side_front', e.target.value)}
+                  onBlur={() => handleCardUpdate(card)}
+                  required
+                  className="card-input-textarea"
+                />
+                <label htmlFor={`back-${index}`}>Back</label>
+                <textarea
+                  id={`back-${index}`}
+                  placeholder="Enter definition"
+                  value={card.side_back}
+                  onChange={(e) => handleCardChange(card._id, 'side_back', e.target.value)}
+                  onBlur={() => handleCardUpdate(card)}
+                  required
+                  className="card-input-textarea"
+                />
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
+      <button onClick={handleAddCard} className="add-card-button">+ Add Card</button>
       <button onClick={() => navigate('/dashboard')}>Return to Dashboard</button>
     </div>
   );

@@ -11,35 +11,83 @@
     width: 100%;
   }
   
-  .edit-cards-list {
-    list-style-type: none;
-    padding: 0;
+  .cards-container {
+    max-height: 400px;
+    overflow-y: auto; /* Enable scrolling for cards */
   }
   
-  .edit-card-item {
+  .card-input {
+    background-color: #928779; /* Background color for each card entry */
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    width: 100%; /* Make card fill the available width */
+    box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More rounded shadow */
+    color: white; /* White text color inside the card */
+    position: relative; /* Position relative to place delete icon */
+  }
+  
+  .card-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
   }
   
-  .edit-card-input {
-    flex: 1;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  .delete-icon {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    filter: invert(1); /* Make the icon white */
   }
   
-  .edit-delete-button {
-    background-color: #ff4d4d;
+  .input-pair {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-pair label {
+    margin-right: 10px;
+    white-space: nowrap;
+    color: white; /* White label text color */
+  }
+  
+  .card-input-textarea {
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 48%; /* Adjust width to fit side by side */
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+    height: 53px; /* Fixed height to match the label */
+    box-sizing: border-box;
+    resize: none; /* Disable resizing */
+    margin-right: 10px; /* Add space between front and back text boxes */
+    overflow: hidden; /* Hide overflow to adjust height dynamically */
+  }
+  
+  .add-card-button {
+    background-color: #28a745;
     color: white;
     border: none;
     padding: 10px;
     border-radius: 4px;
     cursor: pointer;
+    margin-top: 10px;
   }
   
-  .edit-delete-button:hover {
-    background-color: #ff1a1a;
+  .add-card-button:hover {
+    background-color: #218838;
+  }
+  
+  .error {
+    color: red;
+    margin-bottom: 10px;
   }
   
