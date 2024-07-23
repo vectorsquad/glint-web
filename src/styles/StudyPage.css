@@ -5,25 +5,50 @@
 
 .cards-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  justify-content: center;
+  margin: 20px 0;
 }
 
 .card {
   background: #AAFFCC; /* Aquamarine */
   border: 1px solid #364038; /* Black Olive */
-  padding: 20px;
+  padding: 40px;
   border-radius: 8px;
-  width: 200px;
+  width: 300px;
   text-align: center;
+  transition: transform 0.2s;
+  cursor: pointer;
 }
 
-.question {
-  font-weight: bold;
-  color: #1D8734; /* Forest Green */
+.card .content {
+  font-size: 18px;
 }
 
-.answer {
-  margin-top: 10px;
-  color: #16DC65; /* Malachite */
+.ferris-wheel {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.ferris-wheel-dot {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #ccc;
+  margin: 0 5px;
+  transition: background-color 0.3s;
+}
+
+.card-navigation {
+  margin: 20px 0;
+}
+
+.card-navigation button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
