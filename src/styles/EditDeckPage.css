@@ -22,8 +22,8 @@
   }
   
   .cards-container {
-    max-height: 400px;
-    overflow-y: auto; /* Enable scrolling for cards */
+    display: flex;
+    flex-direction: column;
   }
   
   .card-input {

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../components/LoggedInHeader';
 import '../styles/EditDeckPage.css';
 
 interface IDeck {
@@ -67,6 +68,11 @@ const EditDeckPage: React.FC = () => {
   };
 
   const handleDeckNameBlur = async () => {
+    if (!newName.trim()) {
+      setError('Deck name is required.');
+      return;
+    }
+
     try {
       const response = await axios.post<void | ErrorResponse>(
         '/api/v1/updateDeck',
@@ -157,62 +163,79 @@ const EditDeckPage: React.FC = () => {
 
   if (isLoading) return <div>Loading...</div>;
 
+  const handleReturnToDashboard = () => {
+    if (!newName.trim()) {
+      setError('Deck name is required.');
+      return;
+    }
+
+    if (cards.length < 2 || cards.some(card => !card.side_front.trim() || !card.side_back.trim())) {
+      setError('At least 2 cards with both front and back filled are required.');
+      return;
+    }
+
+    navigate('/dashboard');
+  };
+
   return (
-    <div className="edit-deck-container">
-      <h1>Edit Deck</h1>
-      <div className="set-name">
-        <label htmlFor="set-name">Deck Name</label>
-        <input
-          id="set-name"
-          type="text"
-          placeholder="Enter a title"
-          value={newName}
-          onChange={handleNameChange}
-          onBlur={handleDeckNameBlur}
-          required
-        />
-      </div>
-      {error && <p className="error">{error}</p>}
-      <div className="cards-container">
-        {cards.map((card, index) => (
-          <div key={index} className="card-input">
-            <img
-              src="/delete.png"
-              alt="Delete"
-              className="delete-icon"
-              onClick={() => deleteCard(index)}
-            />
-            <h3>Card {index + 1}</h3>
-            <div className="input-pair">
-              <label htmlFor={`front-${index}`}>Front</label>
-              <textarea
-                id={`front-${index}`}
-                placeholder="Enter term"
-                value={card.side_front}
-                onChange={(e) => handleCardChange(index, 'side_front', e.target.value)}
-                onBlur={() => handleCardUpdate(card)}
-                required
-                className="card-input-textarea"
-                onInput={(e) => adjustTextareaHeight(e.target as HTMLTextAreaElement)}
+    <div>
+      <Header />
+      <div className="edit-deck-container">
+        <h1>Edit Deck</h1>
+        <div className="set-name">
+          <label htmlFor="set-name">Deck Name</label>
+          <input
+            id="set-name"
+            type="text"
+            placeholder="Enter a title"
+            value={newName}
+            onChange={handleNameChange}
+            onBlur={handleDeckNameBlur}
+            required
+          />
+        </div>
+        {error && <p className="error">{error}</p>}
+        <div className="cards-container">
+          {cards.map((card, index) => (
+            <div key={index} className="card-input">
+              <img
+                src="/delete.png"
+                alt="Delete"
+                className="delete-icon"
+                onClick={() => deleteCard(index)}
               />
-              <label htmlFor={`back-${index}`}>Back</label>
-              <textarea
-                id={`back-${index}`}
-                placeholder="Enter definition"
-                value={card.side_back}
-                onChange={(e) => handleCardChange(index, 'side_back', e.target.value)}
-                onBlur={() => handleCardUpdate(card)}
-                required
-                className="card-input-textarea"
-                onInput={(e) => adjustTextareaHeight(e.target as HTMLTextAreaElement)}
-              />
+              <h3>Card {index + 1}</h3>
+              <div className="input-pair">
+                <label htmlFor={`front-${index}`}>Front</label>
+                <textarea
+                  id={`front-${index}`}
+                  placeholder="Enter term"
+                  value={card.side_front}
+                  onChange={(e) => handleCardChange(index, 'side_front', e.target.value)}
+                  onBlur={() => handleCardUpdate(card)}
+                  required
+                  className="card-input-textarea"
+                  onInput={(e) => adjustTextareaHeight(e.target as HTMLTextAreaElement)}
+                />
+                <label htmlFor={`back-${index}`}>Back</label>
+                <textarea
+                  id={`back-${index}`}
+                  placeholder="Enter definition"
+                  value={card.side_back}
+                  onChange={(e) => handleCardChange(index, 'side_back', e.target.value)}
+                  onBlur={() => handleCardUpdate(card)}
+                  required
+                  className="card-input-textarea"
+                  onInput={(e) => adjustTextareaHeight(e.target as HTMLTextAreaElement)}
+                />
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
-      <div className="button-container">
-        <button onClick={addCard} className="add-card-btn">+ Add Card</button>
-        <button onClick={() => navigate('/dashboard')} className="create-btn">Return to Dashboard</button>
+          ))}
+        </div>
+        <div className="button-container">
+          <button onClick={addCard} className="add-card-btn">+ Add Card</button>
+          <button onClick={handleReturnToDashboard} className="create-btn">Return to Dashboard</button>
+        </div>
       </div>
     </div>
   );
