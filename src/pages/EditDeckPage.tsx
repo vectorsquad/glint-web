@@ -147,8 +147,34 @@ const EditDeckPage: React.FC = () => {
     }
   };
 
-  const addCard = () => {
-    setCards([...cards, { _id: `${Date.now()}`, id_deck: deckId!, side_front: '', side_back: '', deck_index: cards.length }]);
+  const addCard = async () => {
+    const newCard: ICard = {
+      _id: `${Date.now()}`, // Use a unique ID generator for new cards
+      id_deck: deckId!,
+      side_front: '',
+      side_back: '',
+      deck_index: cards.length
+    };
+
+    try {
+      const response = await axios.post<ICard>(
+        '/api/v1/create',
+        {
+          id_deck: deckId,
+          side_front: newCard.side_front,
+          side_back: newCard.side_back
+        }
+      );
+
+      if (response.data) {
+        setCards([...cards, response.data]);
+      } else {
+        setError('Failed to create card. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error creating card:', err);
+      setError('Failed to create card. Please try again.');
+    }
   };
 
   const adjustTextareaHeight = (textarea: HTMLTextAreaElement) => {
