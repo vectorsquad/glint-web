@@ -13,6 +13,7 @@ import { AuthProvider } from './context/AuthContext';
 import InitialAuthCheck from './components/InitialAuthCheck';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import SendPassword from './pages/SendPasswordPage'
+import VerifyEmail from './components/VerifyEmail';
 
 const App: React.FC = () => {
   return (
@@ -29,6 +30,7 @@ const App: React.FC = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/updatePassword" element={<ResetPasswordPage/>} />
             <Route path="/sendPassword" element={<SendPassword />} />
+            <Route path="/verify-email" element={<VerifyEmail />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </div>
