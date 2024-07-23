@@ -187,7 +187,9 @@ const EditDeckPage: React.FC = () => {
     <div>
       <Header />
       <div className="edit-deck-container">
-        <h2>Edit Deck</h2>
+        <div className="edit-deck-header">
+          <h2>Edit Deck</h2>
+        </div>
         <div className="set-name">
           <label htmlFor="set-name">Deck Name</label>
           <input

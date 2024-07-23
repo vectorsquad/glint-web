@@ -48,20 +48,22 @@
   }
   
   .cards-container {
-    max-height: 400px;
-    overflow-y: auto; /* Enable scrolling for cards */
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Add some space between cards */
   }
   
   .card-input {
     background-color: #364038; /* Black Olive */
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
-    margin-bottom: 20px;
     width: 100%; /* Make card fill the available width */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More rounded shadow */
     color: white; /* White text color inside the card */
     position: relative; /* Position relative to place delete icon */
+    display: flex;
+    flex-direction: column;
   }
   
   .card-header {

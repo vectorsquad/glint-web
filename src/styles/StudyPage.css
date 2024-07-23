@@ -1,6 +1,7 @@
 .study-page-container {
   padding: 20px;
-  background-color: #EBFFF0; /* Honeydew */
+  margin: 0 auto; /* Center the content */
+  max-width: 1000px; /* Limit the maximum width */
   text-align: center;
 }
 
@@ -14,9 +15,10 @@
 .card {
   background: #AAFFCC; /* Aquamarine */
   border: 1px solid #364038; /* Black Olive */
-  padding: 40px;
+  padding: 60px;
   border-radius: 8px;
-  width: 300px;
+  width: 500px; /* Increased width */
+  height: 300px; /* Increased height */
   text-align: center;
   transition: transform 0.2s;
   cursor: pointer;
@@ -26,7 +28,7 @@
 }
 
 .card .content {
-  font-size: 18px;
+  font-size: 24px; /* Increased font size */
 }
 
 .ferris-wheel {
@@ -56,10 +58,16 @@
 }
 
 .nav-icon {
-  width: 30px;
-  height: 30px;
+  width: 50px; /* Increased size for better visibility */
+  height: 50px; /* Increased size for better visibility */
   cursor: pointer;
   margin: 0 20px;
+  filter: invert(15%) sepia(10%) saturate(300%) hue-rotate(80deg) brightness(90%) contrast(90%); /* Apply the Black Olive color */
+  transition: filter 0.3s;
+}
+
+.nav-icon:hover {
+  filter: invert(25%) sepia(20%) saturate(300%) hue-rotate(80deg) brightness(80%) contrast(90%); /* Darken the color on hover */
 }
 
 .return-button {
@@ -70,6 +78,7 @@
   border-radius: 4px;
   cursor: pointer;
   font-family: Arial, sans-serif; /* Ensure consistent font */
+  margin-top: 20px;
 }
 
 .return-button:hover {

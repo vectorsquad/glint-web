@@ -73,12 +73,10 @@ const StudyPage: React.FC = () => {
 
   const goToNextCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
-    setIsFront(true); // Reset to front side when navigating
   };
 
   const goToPreviousCard = () => {
     setCurrentCardIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
-    setIsFront(true); // Reset to front side when navigating
   };
 
   const handleCardClick = () => {
@@ -114,14 +112,18 @@ const StudyPage: React.FC = () => {
           <>
             <h1>{deck.name}</h1>
             <div className="cards-container">
-              <div className="card" onClick={handleCardClick}>
-                <div className="content">{isFront ? currentCard.side_front : currentCard.side_back}</div>
+              <div className='card' onClick={handleCardClick}>
+                <div className='content'>{isFront ? currentCard.side_front : currentCard.side_back}</div>
               </div>
             </div>
             {renderFerrisWheel()}
             <div className="card-navigation">
-              <img src="/previous.png" alt="Previous" onClick={goToPreviousCard} className="nav-icon"/>
-              <img src="/next.png" alt="Next" onClick={goToNextCard} className="nav-icon"/>
+              <button onClick={goToPreviousCard}>
+                <img src="/previous.png" alt="Previous" className="nav-icon" />
+              </button>
+              <button onClick={goToNextCard}>
+                <img src="/next.png" alt="Next" className="nav-icon" />
+              </button>
             </div>
             <button onClick={handleReturnToDashboard} className="return-button">Return to Dashboard</button>
           </>
