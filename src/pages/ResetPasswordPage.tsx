@@ -39,7 +39,7 @@ const ResetPasswordPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post('/api/v1/updatePassword?user_code=${code}', { password: password });
+      const response = await axios.post(`/api/v1/updatePassword?user_code=${code}`, { password: password });
 
       if (response.status >= 200 || response.status < 300) {
         alert("Password changed!");

@@ -1,6 +1,6 @@
 // src/App.tsx
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import Homepage from './pages/HomePage';
 import AboutUs from './pages/AboutUs';
 import Dashboard from './pages/Dashboard';
@@ -29,6 +29,7 @@ const App: React.FC = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/updatePassword" element={<ResetPasswordPage/>} />
             <Route path="/sendPassword" element={<SendPassword />} />
+            <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </div>
       </Router>
