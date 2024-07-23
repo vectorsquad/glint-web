@@ -17,55 +17,87 @@ interface IDeck {
   _id: string;
   id_user: string;
   name: string;
-  cards: ICard[];
 }
 
 const StudyPage: React.FC = () => {
   const { deckId } = useParams<{ deckId: string }>();
   const { user } = useContext(AuthContext);
   const [deck, setDeck] = useState<IDeck | null>(null);
+  const [cards, setCards] = useState<ICard[]>([]);
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isFront, setIsFront] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    const fetchDeck = async () => {
-      setIsLoading(true);
-      setError('');
-      try {
-        const response = await axios.post('/api/v1/findDeck', 
-          { _id: deckId },
-          {
-            headers: {
-              'Authorization': `Bearer ${user.token}`
-            }
+  const fetchDeckDetails = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const response = await axios.post('/api/v1/findDeck', 
+        { _id: deckId },
+        {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
           }
-        );
-        setDeck(response.data[0]); // The API returns an array, so we need to get the first item
-      } catch (error) {
-        console.error('Error fetching deck:', error);
-        setError('Failed to fetch deck. Please try again.');
-      }
-      setIsLoading(false);
-    };
+        }
+      );
+      setDeck(response.data[0]); // The API returns an array, so we need to get the first item
+    } catch (error) {
+      console.error('Error fetching deck:', error);
+      setError('Failed to fetch deck details. Please try again.');
+    }
+    setIsLoading(false);
+  };
 
-    fetchDeck();
+  const fetchNextCard = async () => {
+    setIsLoading(true);
+    setError('');
+    try {
+      const response = await axios.post('/api/v1/runApp', 
+        { id: user.id, deckId },
+        {
+          headers: {
+            'Authorization': `Bearer ${user.token}`
+          }
+        }
+      );
+      const card: ICard = response.data;
+      if (card.message.includes("no more cards remaining")) {
+        setError(card.message);
+      } else {
+        setCards((prevCards) => [...prevCards, card]);
+      }
+    } catch (error) {
+      console.error('Error fetching card:', error);
+      setError('Failed to fetch card. Please try again.');
+    }
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    fetchDeckDetails();
+    fetchNextCard();
   }, [deckId, user.token]);
 
   const goToNextCard = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % (deck?.cards.length || 1));
+    if (currentCardIndex < cards.length - 1) {
+      setCurrentCardIndex((prevIndex) => prevIndex + 1);
+    } else {
+      fetchNextCard();
+    }
   };
 
   const goToPreviousCard = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + (deck?.cards.length || 1)) % (deck?.cards.length || 1));
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex((prevIndex) => prevIndex - 1);
+    }
   };
 
   const handleCardClick = () => {
     setIsFront(!isFront);
   }
 
-  const currentCard = deck?.cards[currentCardIndex];
+  const currentCard = cards[currentCardIndex];
 
   return (
     <div className="study-page-container">
@@ -77,7 +109,7 @@ const StudyPage: React.FC = () => {
           <>
             <h1>{deck.name}</h1>
             <div className="card-navigation">
-              <button onClick={goToPreviousCard}>Previous</button>
+              <button onClick={goToPreviousCard} disabled={currentCardIndex === 0}>Previous</button>
               <button onClick={goToNextCard}>Next</button>
             </div>
             <div className="cards-container">
