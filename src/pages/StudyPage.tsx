@@ -75,7 +75,7 @@ const StudyPage: React.FC = () => {
   };
 
   const goToPreviousCard = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
+    setCurrentCardIndex((prevIndex) => (prevIndex === 0 ? cards.length - 1 : prevIndex - 1));
   };
 
   const handleCardClick = () => {
@@ -83,6 +83,19 @@ const StudyPage: React.FC = () => {
   }
 
   const currentCard = cards[currentCardIndex];
+
+  const renderFerrisWheel = () => {
+    return (
+      <div className="ferris-wheel">
+        {cards.map((_, index) => (
+          <div 
+            key={index} 
+            className={`ferris-wheel-dot ${index === currentCardIndex ? 'active' : ''}`}
+          ></div>
+        ))}
+      </div>
+    );
+  };
 
   return (
     <div className="study-page-container">
@@ -93,14 +106,15 @@ const StudyPage: React.FC = () => {
         deck && currentCard && (
           <>
             <h1>{deck.name}</h1>
-            <div className="card-navigation">
-              <button onClick={goToPreviousCard} disabled={currentCardIndex === 0}>Previous</button>
-              <button onClick={goToNextCard}>Next</button>
-            </div>
             <div className="cards-container">
               <div className='card' onClick={handleCardClick}>
                 <div className='content'>{isFront ? currentCard.side_front : currentCard.side_back}</div>
               </div>
+            </div>
+            {renderFerrisWheel()}
+            <div className="card-navigation">
+              <button onClick={goToPreviousCard} disabled={currentCardIndex === 0}>Previous</button>
+              <button onClick={goToNextCard}>Next</button>
             </div>
           </>
         )
