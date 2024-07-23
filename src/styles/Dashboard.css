@@ -26,14 +26,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  background: #1D8734; /* Forest Green */
-  color: #EBFFF0; /* Honeydew text color */
+  background: #AAFFCC; /* Aquamarine */
+  color: #364038; /* Black Olive text color */
 }
 
 .plus-icon {
   font-size: 24px;
   font-weight: bold;
-  color: #EBFFF0; /* Honeydew */
+  color: #364038; /* Black Olive text color */
 }
 
 .search-container {

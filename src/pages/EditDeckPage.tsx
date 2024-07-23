@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/LoggedInHeader';
 import '../styles/EditDeckPage.css';
-import useAuth from '../hooks/useAuth'
+import useAuth from '../hooks/useAuth';
 
 interface IDeck {
   _id: string;
@@ -187,7 +187,7 @@ const EditDeckPage: React.FC = () => {
     <div>
       <Header />
       <div className="edit-deck-container">
-        <h1>Edit Deck</h1>
+        <h2>Edit Deck</h2>
         <div className="set-name">
           <label htmlFor="set-name">Deck Name</label>
           <input
