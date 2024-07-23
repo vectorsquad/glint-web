@@ -72,15 +72,11 @@ const StudyPage: React.FC = () => {
   }, [deckId, user.token]);
 
   const goToNextCard = () => {
-    if (currentCardIndex < cards.length - 1) {
-      setCurrentCardIndex(currentCardIndex + 1);
-    }
+    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
   };
 
   const goToPreviousCard = () => {
-    if (currentCardIndex > 0) {
-      setCurrentCardIndex(currentCardIndex - 1);
-    }
+    setCurrentCardIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length);
   };
 
   const handleCardClick = () => {
@@ -122,7 +118,7 @@ const StudyPage: React.FC = () => {
             </div>
             {renderFerrisWheel()}
             <div className="card-navigation">
-              <button onClick={goToPreviousCard} disabled={currentCardIndex === 0}>Previous</button>
+              <button onClick={goToPreviousCard}>Previous</button>
               <button onClick={goToNextCard}>Next</button>
             </div>
             <button onClick={handleReturnToDashboard} className="return-button">Return to Dashboard</button>
