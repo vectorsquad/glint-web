@@ -13,7 +13,7 @@ import { AuthProvider } from './context/AuthContext';
 import InitialAuthCheck from './components/InitialAuthCheck';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import SendPassword from './pages/SendPasswordPage'
-import VerifyEmail from './components/VerifyEmail';
+import VerifyEmail from './pages/VerifyEmail';
 
 const App: React.FC = () => {
   return (
