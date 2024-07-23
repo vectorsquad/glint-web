@@ -11,12 +11,13 @@
 }
 
 .deck-card {
-  background: #f5f5f5;
-  border: 1px solid #ccc;
+  background: #AAFFCC; /* Aquamarine */
+  border: 1px solid #364038; /* Black Olive */
   padding: 20px;
   border-radius: 8px;
   width: 200px;
   text-align: center;
+  color: #364038; /* Black Olive text color */
 }
 
 .add-set-card {
@@ -25,11 +26,14 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  background: #1D8734; /* Forest Green */
+  color: #EBFFF0; /* Honeydew text color */
 }
 
 .plus-icon {
   font-size: 24px;
   font-weight: bold;
+  color: #EBFFF0; /* Honeydew */
 }
 
 .search-container {
@@ -43,8 +47,9 @@
   width: 100%;
   padding: 10px;
   padding-left: 40px; /* Adjust this value to add space for the icon */
-  border: 1px solid #ccc;
+  border: 1px solid #364038; /* Black Olive */
   border-radius: 4px;
+  color: #364038; /* Black Olive text color */
 }
 
 .search-icon {
