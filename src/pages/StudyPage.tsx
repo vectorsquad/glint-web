@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import '../styles/StudyPage.css';
 import { AuthContext } from '../context/AuthContext';
@@ -26,6 +26,7 @@ const StudyPage: React.FC = () => {
   const [isFront, setIsFront] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const fetchDeckDetails = async () => {
     setIsLoading(true);
@@ -71,15 +72,23 @@ const StudyPage: React.FC = () => {
   }, [deckId, user.token]);
 
   const goToNextCard = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex + 1) % cards.length);
+    if (currentCardIndex < cards.length - 1) {
+      setCurrentCardIndex(currentCardIndex + 1);
+    }
   };
 
   const goToPreviousCard = () => {
-    setCurrentCardIndex((prevIndex) => (prevIndex === 0 ? cards.length - 1 : prevIndex - 1));
+    if (currentCardIndex > 0) {
+      setCurrentCardIndex(currentCardIndex - 1);
+    }
   };
 
   const handleCardClick = () => {
     setIsFront(!isFront);
+  }
+
+  const handleReturnToDashboard = () => {
+    navigate('/dashboard');
   }
 
   const currentCard = cards[currentCardIndex];
@@ -116,6 +125,7 @@ const StudyPage: React.FC = () => {
               <button onClick={goToPreviousCard} disabled={currentCardIndex === 0}>Previous</button>
               <button onClick={goToNextCard}>Next</button>
             </div>
+            <button onClick={handleReturnToDashboard} className="return-button">Return to Dashboard</button>
           </>
         )
       )}
