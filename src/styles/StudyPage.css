@@ -1,27 +1,29 @@
 .study-page-container {
-    padding: 20px;
-  }
-  
-  .cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .card {
-    background: #f5f5f5;
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 8px;
-    width: 200px;
-    text-align: center;
-  }
-  
-  .question {
-    font-weight: bold;
-  }
-  
-  .answer {
-    margin-top: 10px;
-  }
-  
+  padding: 20px;
+  background-color: #EBFFF0; /* Honeydew */
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.card {
+  background: #AAFFCC; /* Aquamarine */
+  border: 1px solid #364038; /* Black Olive */
+  padding: 20px;
+  border-radius: 8px;
+  width: 200px;
+  text-align: center;
+}
+
+.question {
+  font-weight: bold;
+  color: #1D8734; /* Forest Green */
+}
+
+.answer {
+  margin-top: 10px;
+  color: #16DC65; /* Malachite */
+}

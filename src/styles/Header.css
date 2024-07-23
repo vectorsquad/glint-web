@@ -1,5 +1,5 @@
 .header {
-    color: #040404; /* Dark text color */
+    color: #364038; /* Black Olive */
   }
   
   .header .container {
@@ -10,27 +10,27 @@
   
   .header .logo {
     font-size: 24px;
-    color: #15DB63; /* Primary accent color */
+    color: #16DC65; /* Malachite */
     text-decoration: none;
     margin-top: 20px;
   }
 
   .header nav a {
-    color: #040404; /* Dark text color */
+    color: #364038; /* Black Olive */
     margin-left: 20px;
     text-decoration: none;
   }
   
   .header nav .login-button {
-    background-color: #040404; /* Black background */
-    color: #FEFEFE; /* White text */
+    background-color: #16DC65; /* Malachite */
+    color: #EBFFF0; /* Honeydew */
     padding: 10px 20px;
     border-radius: 4px;
     text-decoration: none;
   }
   
   .header nav .login-button:hover {
-    background-color: #333333; /* Slightly lighter black */
+    background-color: #1D8734; /* Forest Green */
   }
   
   

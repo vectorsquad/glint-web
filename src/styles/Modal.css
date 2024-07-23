@@ -13,7 +13,7 @@
 }
 
 .modal {
-  background: #fff;
+  background: #EBFFF0; /* Honeydew */
   padding: 20px;
   border-radius: 8px;
   width: 80%;
@@ -38,6 +38,7 @@
   flex-grow: 1;
   text-align: center;
   margin: 0;
+  color: #364038; /* Black Olive */
 }
 
 .modal-header .close {
@@ -64,7 +65,7 @@
 }
 
 .card-input {
-  background-color: #928779; /* Background color for each card entry */
+  background-color: #364038; /* Black Olive */
   padding: 10px;
   border-radius: 8px;
   margin-bottom: 20px;
@@ -129,7 +130,7 @@
 .add-card-btn,
 .create-btn {
   padding: 10px 20px;
-  background-color: #15DB63; /* Use the primary color */
+  background-color: #16DC65; /* Malachite */
   color: white;
   border: none;
   border-radius: 4px;
@@ -140,7 +141,7 @@
 
 .add-card-btn:hover,
 .create-btn:hover {
-  background-color: #12b354; /* Darker shade of the primary color for hover effect */
+  background-color: #1D8734; /* Forest Green */
 }
 
 .modal-footer {
@@ -149,7 +150,7 @@
   justify-content: space-between;
   position: sticky;
   bottom: 0;
-  background: #fff;
+  background: #EBFFF0; /* Honeydew */
   padding: 10px 0;
 }
 

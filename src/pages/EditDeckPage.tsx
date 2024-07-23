@@ -34,20 +34,12 @@ const EditDeckPage: React.FC = () => {
   useEffect(() => {
     const fetchDeckAndCards = async () => {
       try {
-        const deckResponse = await axios.post<IDeck[]>(
-          '/api/v1/findDeck',
-          { _id: deckId }
-        );
-
+        const deckResponse = await axios.post<IDeck[]>('/api/v1/findDeck', { _id: deckId });
         if (deckResponse.data.length > 0) {
           setDeck(deckResponse.data[0]);
           setNewName(deckResponse.data[0].name);
 
-          const cardsResponse = await axios.post<ICard[]>(
-            '/api/v1/find',
-            { id_deck: deckId }
-          );
-
+          const cardsResponse = await axios.post<ICard[]>('/api/v1/find', { id_deck: deckId });
           setCards(cardsResponse.data);
         } else {
           setError('Deck not found');
@@ -74,11 +66,7 @@ const EditDeckPage: React.FC = () => {
     }
 
     try {
-      const response = await axios.post<void | ErrorResponse>(
-        '/api/v1/updateDeck',
-        { _id: deckId, name: newName }
-      );
-
+      const response = await axios.post<void | ErrorResponse>('/api/v1/updateDeck', { _id: deckId, name: newName });
       if (response.data && (response.data as ErrorResponse).message) {
         setError((response.data as ErrorResponse).message);
       } else {
@@ -102,16 +90,12 @@ const EditDeckPage: React.FC = () => {
 
   const handleCardUpdate = async (card: ICard) => {
     try {
-      const response = await axios.post<void | ErrorResponse>(
-        '/api/v1/update',
-        {
-          _id: card._id,
-          id_deck: deckId,
-          side_front: card.side_front,
-          side_back: card.side_back
-        }
-      );
-
+      const response = await axios.post<void | ErrorResponse>('/api/v1/update', {
+        _id: card._id,
+        id_deck: deckId,
+        side_front: card.side_front,
+        side_back: card.side_back,
+      });
       if (response.data && (response.data as ErrorResponse).message) {
         setError((response.data as ErrorResponse).message);
       } else {
@@ -127,10 +111,7 @@ const EditDeckPage: React.FC = () => {
     const cardId = cards[index]._id;
     if (cards.length > 2) {
       try {
-        const response = await axios.post<void | ErrorResponse>(
-          '/api/v1/delete',
-          { _id: cardId }
-        );
+        const response = await axios.post<void | ErrorResponse>('/api/v1/delete', { _id: cardId });
         if (response.data && (response.data as ErrorResponse).message) {
           setError((response.data as ErrorResponse).message);
         } else {
@@ -153,18 +134,15 @@ const EditDeckPage: React.FC = () => {
       id_deck: deckId!,
       side_front: '',
       side_back: '',
-      deck_index: cards.length
+      deck_index: cards.length,
     };
 
     try {
-      const response = await axios.post<ICard>(
-        '/api/v1/create',
-        {
-          id_deck: deckId,
-          side_front: newCard.side_front,
-          side_back: newCard.side_back
-        }
-      );
+      const response = await axios.post<ICard>('/api/v1/create', {
+        id_deck: deckId,
+        side_front: newCard.side_front,
+        side_back: newCard.side_back,
+      });
 
       if (response.data) {
         setCards([...cards, response.data]);
@@ -184,7 +162,7 @@ const EditDeckPage: React.FC = () => {
 
   useEffect(() => {
     const textareas = document.querySelectorAll('.card-input-textarea');
-    textareas.forEach(textarea => adjustTextareaHeight(textarea as HTMLTextAreaElement));
+    textareas.forEach((textarea) => adjustTextareaHeight(textarea as HTMLTextAreaElement));
   }, [cards]);
 
   if (isLoading) return <div>Loading...</div>;
@@ -195,7 +173,7 @@ const EditDeckPage: React.FC = () => {
       return;
     }
 
-    if (cards.length < 2 || cards.some(card => !card.side_front.trim() || !card.side_back.trim())) {
+    if (cards.length < 2 || cards.some((card) => !card.side_front.trim() || !card.side_back.trim())) {
       setError('At least 2 cards with both front and back filled are required.');
       return;
     }
@@ -259,8 +237,12 @@ const EditDeckPage: React.FC = () => {
           ))}
         </div>
         <div className="button-container">
-          <button onClick={addCard} className="add-card-btn">+ Add Card</button>
-          <button onClick={handleReturnToDashboard} className="create-btn">Return to Dashboard</button>
+          <button onClick={addCard} className="add-card-btn">
+            + Add Card
+          </button>
+          <button onClick={handleReturnToDashboard} className="create-btn">
+            Return to Dashboard
+          </button>
         </div>
       </div>
     </div>
