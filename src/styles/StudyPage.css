@@ -58,7 +58,7 @@
 }
 
 .nav-icon {
-  width: 40px; /* Decreased width */
+  width: 50px; /* Decreased width */
   height: 50px; /* Keep height same for visibility */
   cursor: pointer;
   margin: 0 20px;
@@ -79,7 +79,7 @@
   cursor: pointer;
   font-family: Arial, sans-serif; /* Ensure consistent font */
   margin-top: 20px;
-  width: 150px; /* Set a fixed width */
+  width: 50px; /* Set a fixed width */
   max-width: 100%; /* Ensure it doesn't overflow */
 }
 
