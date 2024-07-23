@@ -30,7 +30,7 @@ const App: React.FC = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/updatePassword" element={<ResetPasswordPage/>} />
             <Route path="/sendPassword" element={<SendPassword />} />
-            <Route path="/verify-email" element={<VerifyEmail />} />
+            <Route path="/api/v1/verify" element={<VerifyEmail />} />
             <Route path="*" element={<Navigate to="/login" replace />} />
           </Routes>
         </div>

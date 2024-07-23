@@ -1,34 +1,43 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const VerifyEmail: React.FC = () => {
-  const [verificationStatus, setVerificationStatus] = useState<string>('');
+  const [verificationStatus, setVerificationStatus] = useState<string>('Verifying...');
   const location = useLocation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const status = searchParams.get('status');
+    const verifyEmail = async () => {
+      const searchParams = new URLSearchParams(location.search);
+      const code = searchParams.get('code');
 
-    if (status === 'success') {
-      setVerificationStatus('Your email has been successfully verified!');
-      // Redirect to the main page or dashboard after 5 seconds
-      setTimeout(() => navigate('/dashboard'), 5000);
-    } else {
-      setVerificationStatus('Email verification failed. Please try again or contact support.');
-    }
+      if (!code) {
+        setVerificationStatus('Invalid verification link');
+        return;
+      }
+
+      try {
+        const response = await axios.get(`/api/v1/verify?code=${code}`);
+        if (response.data.success) {
+          setVerificationStatus('Email verified successfully!');
+          // Redirect to the main page or dashboard after 3 seconds
+          setTimeout(() => navigate('/dashboard'), 3000);
+        } else {
+          setVerificationStatus(response.data.message || 'Email verification failed. Please try again.');
+        }
+      } catch (error) {
+        setVerificationStatus('An error occurred during verification. Please try again.');
+      }
+    };
+
+    verifyEmail();
   }, [location, navigate]);
 
   return (
     <div className="verify-email-container">
       <h1>Email Verification</h1>
       <p>{verificationStatus}</p>
-      {verificationStatus.includes('successfully') && (
-        <p>You will be redirected to the dashboard in a few seconds...</p>
-      )}
-      {!verificationStatus.includes('successfully') && (
-        <p>Please check your email and try the verification link again.</p>
-      )}
     </div>
   );
 };
