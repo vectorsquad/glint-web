@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from '../components/LoggedInHeader';
 import '../styles/StudyPage.css';
 import { AuthContext } from '../context/AuthContext';
 
@@ -103,32 +104,35 @@ const StudyPage: React.FC = () => {
   };
 
   return (
-    <div className="study-page-container">
-      {error && <p className="error">{error}</p>}
-      {isLoading ? (
-        <p>Loading...</p>
-      ) : (
-        deck && currentCard && (
-          <>
-            <h1>{deck.name}</h1>
-            <div className="cards-container">
-              <div className='card' onClick={handleCardClick}>
-                <div className='content'>{isFront ? currentCard.side_front : currentCard.side_back}</div>
+    <div>
+      <Header/>
+      <div className="study-page-container">
+        {error && <p className="error">{error}</p>}
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : (
+          deck && currentCard && (
+            <>
+              <h1>{deck.name}</h1>
+              <div className="cards-container">
+                <div className='card' onClick={handleCardClick}>
+                  <div className='content'>{isFront ? currentCard.side_front : currentCard.side_back}</div>
+                </div>
               </div>
-            </div>
-            {renderFerrisWheel()}
-            <div className="card-navigation">
-              <button onClick={goToPreviousCard}>
-                <img src="/previous.png" alt="Previous" className="nav-icon" />
-              </button>
-              <button onClick={goToNextCard}>
-                <img src="/next.png" alt="Next" className="nav-icon" />
-              </button>
-            </div>
-            <button onClick={handleReturnToDashboard} className="return-button">Return to Dashboard</button>
-          </>
-        )
-      )}
+              {renderFerrisWheel()}
+              <div className="card-navigation">
+                <button onClick={goToPreviousCard}>
+                  <img src="/previous.png" alt="Previous" className="nav-icon" />
+                </button>
+                <button onClick={goToNextCard}>
+                  <img src="/next.png" alt="Next" className="nav-icon" />
+                </button>
+              </div>
+              <button onClick={handleReturnToDashboard} className="return-button">Return to Dashboard</button>
+            </>
+          )
+        )}
+      </div>
     </div>
   );
 };
