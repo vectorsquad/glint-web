@@ -29,20 +29,20 @@
   .cards-container {
     display: flex;
     flex-direction: column;
+    gap: 20px; /* Add space between cards */
   }
   
   .card-input {
     background-color: #928779; /* Background color for each card entry */
     padding: 10px;
     border-radius: 8px;
-    margin-bottom: 20px;
     width: calc(100% - 22px); /* Subtract padding and border to fit inside container */
     max-width: 1000px; /* Limit the maximum width */
     box-sizing: border-box; /* Include padding and border in the element's total width and height */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More rounded shadow */
     color: white; /* White text color inside the card */
     position: relative; /* Position relative to place delete icon */
-    margin: 0 auto 20px auto; /* Center the card and add bottom margin */
+    margin: 0 auto; /* Center the card */
   }
   
   .delete-icon {
