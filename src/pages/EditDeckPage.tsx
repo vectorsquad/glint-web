@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Header from '../components/LoggedInHeader';
 import '../styles/EditDeckPage.css';
+import useAuth from '../hooks/useAuth'
 
 interface IDeck {
   _id: string;
@@ -23,6 +24,7 @@ interface ErrorResponse {
 }
 
 const EditDeckPage: React.FC = () => {
+  const { user } = useAuth();
   const { deckId } = useParams<{ deckId: string }>();
   const navigate = useNavigate();
   const [deck, setDeck] = useState<IDeck | null>(null);

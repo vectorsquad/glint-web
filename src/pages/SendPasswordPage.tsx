@@ -13,12 +13,7 @@ const SendPasswordPage: React.FC = () => {
     e.preventDefault();
 
     try {
-      let tryResponse = await axios.post('/api/v1/sendPasswordRecovery', { email: usernameOrEmail });
-
-      if(tryResponse.status === 404)
-        tryResponse = await axios.post('/api/v1/sendPasswordRecovery', { username: usernameOrEmail });
-
-      const response = tryResponse;
+      const response = await axios.post('/api/v1/sendPasswordRecovery', { email: usernameOrEmail });
 
       if (response.status >= 200 && response.status < 300) {
         // Removed alert and replaced with navigation
