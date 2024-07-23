@@ -58,16 +58,16 @@
 }
 
 .nav-icon {
-  width: 50px; /* Decreased width */
-  height: 50px; /* Keep height same for visibility */
+  width: 40px; /* Decreased width */
+  height: 40px; /* Decreased height */
   cursor: pointer;
-  margin: 0 20px;
-  filter: invert(15%) sepia(10%) saturate(300%) hue-rotate(80deg) brightness(90%) contrast(90%); /* Apply the Black Olive color */
+  margin: 0 30px; /* Increased margin to create a gap */
+  filter: invert(15%) sepia(10%) saturate(300%) hue-rotate(80deg) brightness(90%) contrast(90%);
   transition: filter 0.3s;
 }
 
 .nav-icon:hover {
-  filter: invert(25%) sepia(20%) saturate(300%) hue-rotate(80deg) brightness(80%) contrast(90%); /* Darken the color on hover */
+  filter: invert(25%) sepia(20%) saturate(300%) hue-rotate(80deg) brightness(80%) contrast(90%);
 }
 
 .return-button {
