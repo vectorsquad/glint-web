@@ -53,6 +53,7 @@ const StudyPage: React.FC = () => {
     setIsLoading(true);
     setError('');
     try {
+      console.log('Sending request with:', { id: user.id, deckId });
       const response = await axios.post('/api/v1/runApp', 
         { id: user.id, 
           deckId: deckId
