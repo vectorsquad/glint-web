@@ -126,7 +126,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, onSave, children }) => {
             ))}
           </div>
           <div className="button-container">
-            <button onClick={addCard} className="add-card-btn">Add Card</button>
+            <button onClick={addCard} className="add-card-btn">+ Add Card</button>
             <button onClick={handleSubmit} className="create-btn">Create</button>
           </div>
         </div>

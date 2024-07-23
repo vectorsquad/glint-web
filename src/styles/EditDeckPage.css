@@ -2,10 +2,18 @@
     padding: 20px;
   }
   
-  .edit-deck-name-input {
-    padding: 10px;
-    margin-top: 10px;
+  .set-name {
     margin-bottom: 20px;
+  }
+  
+  .set-name label {
+    margin-right: 10px;
+    white-space: nowrap;
+    color: black; /* Black label text color */
+  }
+  
+  .set-name input {
+    padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     width: 100%;
@@ -28,17 +36,10 @@
     position: relative; /* Position relative to place delete icon */
   }
   
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
   .delete-icon {
     cursor: pointer;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     position: absolute;
     top: 10px;
     right: 10px;
@@ -72,18 +73,28 @@
     overflow: hidden; /* Hide overflow to adjust height dynamically */
   }
   
-  .add-card-button {
-    background-color: #28a745;
-    color: white;
-    border: none;
-    padding: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
   }
   
-  .add-card-button:hover {
-    background-color: #218838;
+  .add-card-btn,
+  .create-btn {
+    padding: 10px 20px;
+    background-color: #15DB63; /* Use the primary color */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Arial, sans-serif; /* Ensure consistent font */
+    margin-bottom: 10px;
+  }
+  
+  .add-card-btn:hover,
+  .create-btn:hover {
+    background-color: #12b354; /* Darker shade of the primary color for hover effect */
   }
   
   .error {
