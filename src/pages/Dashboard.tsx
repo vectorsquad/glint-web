@@ -1,10 +1,11 @@
-import React, { useState, useEffect, useCallback, useContext, useRef } from 'react';
+// src/pages/Dashboard.tsx
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import axios from 'axios';
 import Modal from '../components/Modal';
 import Header from '../components/LoggedInHeader';
 import '../styles/Dashboard.css';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/AuthContext';
+import useAuth from '../hooks/useAuth';
 
 interface IDeck {
   _id: string;
@@ -18,7 +19,7 @@ interface ICard {
 }
 
 const Dashboard: React.FC = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [decks, setDecks] = useState<IDeck[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
