@@ -75,6 +75,8 @@ const EditDeckPage: React.FC = () => {
 
       if (response.data && (response.data as ErrorResponse).message) {
         setError((response.data as ErrorResponse).message);
+      } else {
+        setError('');
       }
     } catch (err) {
       if (axios.isAxiosError(err) && err.response?.status === 404) {
@@ -94,7 +96,7 @@ const EditDeckPage: React.FC = () => {
 
   const handleCardUpdate = async (card: ICard) => {
     try {
-      await axios.post<void | ErrorResponse>(
+      const response = await axios.post<void | ErrorResponse>(
         '/api/v1/update',
         {
           _id: card._id,
@@ -104,7 +106,11 @@ const EditDeckPage: React.FC = () => {
         }
       );
 
-      setCards(cards.map(c => c._id === card._id ? card : c));
+      if (response.data && (response.data as ErrorResponse).message) {
+        setError((response.data as ErrorResponse).message);
+      } else {
+        setError('');
+      }
     } catch (err) {
       console.error('Error updating card:', err);
       setError('Failed to update card. Please try again.');
@@ -115,12 +121,17 @@ const EditDeckPage: React.FC = () => {
     const cardId = cards[index]._id;
     if (cards.length > 2) {
       try {
-        await axios.post<void | ErrorResponse>(
+        const response = await axios.post<void | ErrorResponse>(
           '/api/v1/delete',
           { _id: cardId }
         );
-        const updatedCards = cards.filter((_, i) => i !== index);
-        setCards(updatedCards);
+        if (response.data && (response.data as ErrorResponse).message) {
+          setError((response.data as ErrorResponse).message);
+        } else {
+          const updatedCards = cards.filter((_, i) => i !== index);
+          setCards(updatedCards);
+          setError('');
+        }
       } catch (err) {
         console.error('Error deleting card:', err);
         setError('Failed to delete card. Please try again.');
@@ -145,8 +156,6 @@ const EditDeckPage: React.FC = () => {
   }, [cards]);
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!deck) return <div>Deck not found</div>;
 
   return (
     <div className="edit-deck-container">
