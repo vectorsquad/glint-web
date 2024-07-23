@@ -10,6 +10,7 @@ const ResetPasswordPage: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -41,9 +42,11 @@ const ResetPasswordPage: React.FC = () => {
     try {
       const response = await axios.post(`/api/v1/updatePassword?user_code=${code}`, { password: password });
 
-      if (response.status >= 200 || response.status < 300) {
-        alert("Password changed!");
-        navigate('/login');
+      if (response.status >= 200 && response.status < 300) {
+        setSuccessMessage("Password successfully changed, redirecting...");
+        setTimeout(() => {
+          navigate('/login');
+        }, 3000);
       } else {
         setError('Failed to update password');
       }
@@ -59,6 +62,7 @@ const ResetPasswordPage: React.FC = () => {
       <div className="form-container">
         <h1>Reset Password</h1>
         {error && <p className="error">{error}</p>}
+        {successMessage && <p style={{ color: 'green', fontWeight: 'bold' }}>{successMessage}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-container">
             <input
