@@ -51,14 +51,17 @@
     display: flex;
     flex-direction: column;
     gap: 20px; /* Add some space between cards */
+    max-height: 400px;
+    overflow-y: auto; /* Enable scrolling for cards */
   }
   
   .card-input {
     background-color: #364038; /* Black Olive */
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
+    margin-bottom: 20px;
     width: 100%; /* Make card fill the available width */
-    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+    box-sizing: border-box;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More rounded shadow */
     color: white; /* White text color inside the card */
     position: relative; /* Position relative to place delete icon */
@@ -85,12 +88,13 @@
   
   .input-pair {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 10px;
   }
   
   .input-pair label {
-    margin-bottom: 5px;
+    margin-right: 10px;
     white-space: nowrap;
     color: white; /* White label text color */
   }
@@ -100,12 +104,12 @@
     font-size: 1em;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 100%; /* Full width */
+    width: 48%; /* Adjust width to fit side by side */
     font-family: Arial, sans-serif; /* Ensure consistent font */
     height: 53px; /* Fixed height to match the label */
     box-sizing: border-box;
     resize: none; /* Disable resizing */
-    margin-bottom: 10px; /* Add space between front and back text boxes */
+    margin-right: 10px; /* Add space between front and back text boxes */
     overflow: hidden; /* Hide overflow to adjust height dynamically */
   }
   

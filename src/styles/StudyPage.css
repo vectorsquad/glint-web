@@ -79,6 +79,8 @@
   cursor: pointer;
   font-family: Arial, sans-serif; /* Ensure consistent font */
   margin-top: 20px;
+  width: 150px; /* Set a fixed width */
+  max-width: 100%; /* Ensure it doesn't overflow */
 }
 
 .return-button:hover {

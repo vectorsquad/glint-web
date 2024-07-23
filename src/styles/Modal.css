@@ -60,6 +60,9 @@
 }
 
 .cards-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Add some space between cards */
   max-height: 400px;
   overflow-y: auto; /* Enable scrolling for cards */
 }
@@ -74,6 +77,8 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* More rounded shadow */
   color: white; /* White text color inside the card */
   position: relative; /* Position relative to place delete icon */
+  display: flex;
+  flex-direction: column;
 }
 
 .card-header {
